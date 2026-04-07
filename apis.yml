@@ -4,8 +4,7 @@ url: >-
 apis:
   - aid: british-columbia-data-catalogue:british-columbia-data-catalogue
     name: British Columbia Data Catalogue
-    tags:
-      - API
+    tags: []
     humanURL: https://catalogue.data.gov.bc.ca/
     properties:
       - url: https://catalogue.data.gov.bc.ca/
@@ -15,10 +14,10 @@ apis:
       range of B.C. government data.
 name: British Columbia Data Catalogue
 tags:
+  - Data
+  - Government
   - Provincial
   - State
-  - Government
-  - Data
 type: Contract
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 access: 3rd-Party
