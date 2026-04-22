@@ -1,45 +1,45 @@
-# British Columbia Data Catalogue (british-columbia-data-catalogue)
-The BC Data Catalogue is the place to find, access and explore a wide range of B.C. government data.
+# British Columbia Data Catalogue
 
-**URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-search/british-columbia-data-catalogue/refs/heads/main/apis.yml)
+The British Columbia Data Catalogue is the official open data portal for the Government of British Columbia, Canada. Built on the CKAN open data platform, it provides programmatic access to thousands of BC government datasets covering demographics, environment, geospatial data, finance, transportation, and health.
 
-## Scope
+## API Overview
 
-- **Type:** Contract 
-- **Position:** Consuming 
-- **Access:** 3rd-Party 
+The catalogue exposes a CKAN v3 REST API at:
+```
+https://catalogue.data.gov.bc.ca/api/3/action/
+```
 
-## Tags
+No authentication required for read access to public datasets. All responses return JSON with `help`, `success`, and `result` fields.
 
-- Provincial
-- State
-- Government
-- Data
+## Key Endpoints
 
-## Timestamps
+| Endpoint | Description |
+|----------|-------------|
+| `package_list` | List all available dataset identifiers |
+| `package_search?q={query}` | Search datasets by keyword or filter |
+| `package_show?id={id}` | Retrieve metadata and resources for a specific dataset |
+| `organization_list` | List BC government organizations publishing data |
+| `resource_show?id={id}` | Retrieve information about a specific data resource |
 
-- **Created:** 2024-11-07 
-- **Modified:** 2024-12-22 
+## Example Request
 
-## APIs
+```bash
+curl "https://catalogue.data.gov.bc.ca/api/3/action/package_search?q=census"
+```
 
-### British Columbia Data Catalogue
-The BC Data Catalogue is the place to find, access and explore a wide range of B.C. government data.
+## Data Categories
 
-**Human URL:** [https://catalogue.data.gov.bc.ca/](https://catalogue.data.gov.bc.ca/)
-r
+- Census and demographic data
+- Environmental and climate information
+- Geographic and mapping datasets
+- Financial and economic reports
+- Transportation and infrastructure data
+- Health and social services statistics
+- Natural resources and land use
 
-#### Tags
+## Links
 
-- API
-
-#### Properties
-
-- [Documentation](https://catalogue.data.gov.bc.ca/)
-
-## Maintainers
-
-**FN:** Kin Lane
-
-**Email:** info@apievangelist.com
-
+- [Data Catalogue](https://catalogue.data.gov.bc.ca/)
+- [API Base URL](https://catalogue.data.gov.bc.ca/api/3/action/)
+- [Dataset List](https://catalogue.data.gov.bc.ca/api/3/action/package_list)
+- [BC Government Data Portal](https://www2.gov.bc.ca/gov/content/data/bc-data-catalogue)
