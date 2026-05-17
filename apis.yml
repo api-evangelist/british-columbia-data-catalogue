@@ -10,7 +10,7 @@ tags:
   - CKAN
   - Geospatial
 type: Index
-x-type: government
+kind: government
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 access: Open
 created: '2024-11-07'
