@@ -1,45 +1,63 @@
-# British Columbia Data Catalogue
+# British Columbia Data Catalogue (british-columbia-data-catalogue)
 
-The British Columbia Data Catalogue is the official open data portal for the Government of British Columbia, Canada. Built on the CKAN open data platform, it provides programmatic access to thousands of BC government datasets covering demographics, environment, geospatial data, finance, transportation, and health.
+The British Columbia Data Catalogue is the official open data portal for the Government of British Columbia, Canada. Built on the CKAN open data platform, it provides programmatic access to thousands of BC government datasets spanning census and demographic data, environmental and climate information, geospatial and mapping data, financial reports, transportation and infrastructure data, and health and social services statistics. The CKAN API at api/3/action/ enables searching, listing, and retrieving dataset metadata and resources without authentication.
 
-## API Overview
+**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/british-columbia-data-catalogue/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/british-columbia-data-catalogue/refs/heads/main/apis.yml)
 
-The catalogue exposes a CKAN v3 REST API at:
-```
-https://catalogue.data.gov.bc.ca/api/3/action/
-```
+## Scope
 
-No authentication required for read access to public datasets. All responses return JSON with `help`, `success`, and `result` fields.
+- **Type:** Index
+- **Position:** Consumer
+- **Access:** Open
 
-## Key Endpoints
+## Tags
 
-| Endpoint | Description |
-|----------|-------------|
-| `package_list` | List all available dataset identifiers |
-| `package_search?q={query}` | Search datasets by keyword or filter |
-| `package_show?id={id}` | Retrieve metadata and resources for a specific dataset |
-| `organization_list` | List BC government organizations publishing data |
-| `resource_show?id={id}` | Retrieve information about a specific data resource |
+- Open Data
+- Government
+- Canadian Government
+- British Columbia
+- Provincial Data
+- CKAN
+- Geospatial
 
-## Example Request
+## Timestamps
 
-```bash
-curl "https://catalogue.data.gov.bc.ca/api/3/action/package_search?q=census"
-```
+- **Created:** 2024-11-07
+- **Modified:** 2026-04-21
 
-## Data Categories
+## APIs
 
-- Census and demographic data
-- Environmental and climate information
-- Geographic and mapping datasets
-- Financial and economic reports
-- Transportation and infrastructure data
-- Health and social services statistics
-- Natural resources and land use
+### BC Data Catalogue CKAN API
 
-## Links
+The BC Data Catalogue exposes a CKAN v3 REST API at https://catalogue.data.gov.bc.ca/api/3/action/ providing programmatic access to BC government open datasets. Key endpoints include package_list (list all datasets), package_search (search datasets by query), package_show (retrieve dataset metadata and resources), organization_list (list BC government organizations), and resource_show (retrieve specific data resource information). Returns JSON with success status and result payloads. No authentication required for read access to public datasets.
 
-- [Data Catalogue](https://catalogue.data.gov.bc.ca/)
-- [API Base URL](https://catalogue.data.gov.bc.ca/api/3/action/)
+- **Human URL:** [https://catalogue.data.gov.bc.ca/](https://catalogue.data.gov.bc.ca/)
+
+#### Tags
+
+- CKAN
+- Open Data
+- Dataset Search
+- Metadata
+- Government Data
+
+#### Properties
+
+- [Documentation](https://catalogue.data.gov.bc.ca/)
+- [Base U R L](https://catalogue.data.gov.bc.ca/api/3)
+- [Postman Collection](collections/british-columbia-data-catalogue.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/british-columbia-data-catalogue.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+
+## Common Properties
+
+- [Website](https://catalogue.data.gov.bc.ca/)
+- [A P I Base U R L](https://catalogue.data.gov.bc.ca/api/3/action/)
 - [Dataset List](https://catalogue.data.gov.bc.ca/api/3/action/package_list)
-- [BC Government Data Portal](https://www2.gov.bc.ca/gov/content/data/bc-data-catalogue)
+- [Dataset Search](https://catalogue.data.gov.bc.ca/api/3/action/package_search)
+- [Government Portal](https://www2.gov.bc.ca/gov/content/data/bc-data-catalogue)
+- [L L Ms Txt](https://catalogue.data.gov.bc.ca/llms.txt)
+
+## Maintainers
+
+**FN:** Kin Lane
+**Email:** info@apievangelist.com
