@@ -58,7 +58,7 @@ common:
     url: https://catalogue.data.gov.bc.ca/api/3/action/package_search
   - type: GovernmentPortal
     url: https://www2.gov.bc.ca/gov/content/data/bc-data-catalogue
-  - type: LLMsTxt
+  - type: LlmsText
     url: https://catalogue.data.gov.bc.ca/llms.txt
 maintainers:
   - FN: Kin Lane
