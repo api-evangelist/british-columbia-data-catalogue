@@ -48,6 +48,8 @@ apis:
       data resource information). Returns JSON with success status and result payloads.
       No authentication required for read access to public datasets.
 common:
+  - type: AgenticAccess
+    url: agentic-access/british-columbia-data-catalogue-agentic-access.yml
   - type: DomainSecurity
     url: security/british-columbia-data-catalogue-domain-security.yml
   - type: Website
