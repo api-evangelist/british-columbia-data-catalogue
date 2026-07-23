@@ -1,0 +1,84 @@
+openapi: 3.1.0
+info:
+  title: BC Data Catalogue CKAN Datasets Resources API
+  description: The British Columbia Data Catalogue exposes a CKAN 2.9 API at /api/3/action/ for searching and retrieving open dataset metadata, organizations, groups, tags, and resources without authentication.
+  version: '3'
+  contact:
+    name: BC Data Catalogue
+    url: https://catalogue.data.gov.bc.ca/
+servers:
+- url: https://catalogue.data.gov.bc.ca/api/3
+  description: Production CKAN API
+tags:
+- name: Resources
+paths:
+  /action/resource_show:
+    get:
+      summary: Show resource
+      operationId: resourceShow
+      tags:
+      - Resources
+      parameters:
+      - name: id
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: include_tracking
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Resource
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CkanResponse'
+  /action/resource_search:
+    get:
+      summary: Search resources
+      operationId: resourceSearch
+      tags:
+      - Resources
+      parameters:
+      - name: query
+        in: query
+        schema:
+          type: string
+      - name: order_by
+        in: query
+        schema:
+          type: string
+      - name: limit
+        in: query
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Resources
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CkanResponse'
+components:
+  schemas:
+    CkanResponse:
+      type: object
+      properties:
+        help:
+          type: string
+        success:
+          type: boolean
+        result: {}
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+            __type:
+              type: string
