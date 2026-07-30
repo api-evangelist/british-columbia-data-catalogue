@@ -11,7 +11,19 @@ tags:
   - Geospatial
 type: Index
 kind: government
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Freemium
+  confidence: medium
+  source:
+  - plans
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/british-columbia-data-catalogue.png
 access: Open
 created: '2024-11-07'
 modified: '2026-04-21'
@@ -25,28 +37,82 @@ description: >-
   and health and social services statistics. The CKAN API at api/3/action/ enables
   searching, listing, and retrieving dataset metadata and resources without authentication.
 apis:
-  - aid: british-columbia-data-catalogue:ckan-api
-    name: BC Data Catalogue CKAN API
-    tags:
-      - CKAN
-      - Open Data
-      - Dataset Search
-      - Metadata
-      - Government Data
-    humanURL: https://catalogue.data.gov.bc.ca/
-    properties:
-      - url: https://catalogue.data.gov.bc.ca/
-        type: Documentation
-      - url: https://catalogue.data.gov.bc.ca/api/3
-        type: BaseURL
-    description: >-
-      The BC Data Catalogue exposes a CKAN v3 REST API at https://catalogue.data.gov.bc.ca/api/3/action/
-      providing programmatic access to BC government open datasets. Key endpoints include
-      package_list (list all datasets), package_search (search datasets by query),
-      package_show (retrieve dataset metadata and resources), organization_list
-      (list BC government organizations), and resource_show (retrieve specific
-      data resource information). Returns JSON with success status and result payloads.
-      No authentication required for read access to public datasets.
+- aid: british-columbia-data-catalogue:ckan-api
+  name: BC Data Catalogue CKAN API
+  tags:
+  - CKAN
+  - Open Data
+  - Dataset Search
+  - Metadata
+  - Government Data
+  humanURL: https://catalogue.data.gov.bc.ca/
+  properties:
+  - url: https://catalogue.data.gov.bc.ca/
+    type: Documentation
+  - url: https://catalogue.data.gov.bc.ca/api/3
+    type: BaseURL
+  description: >-
+    The BC Data Catalogue exposes a CKAN v3 REST API at https://catalogue.data.gov.bc.ca/api/3/action/
+    providing programmatic access to BC government open datasets. Key endpoints include package_list (list
+    all datasets), package_search (search datasets by query), package_show (retrieve dataset metadata
+    and resources), organization_list (list BC government organizations), and resource_show (retrieve
+    specific data resource information). Returns JSON with success status and result payloads. No authentication
+    required for read access to public datasets.
+- aid: british-columbia-data-catalogue:british-columbia-data-catalogue-datasets-api
+  name: British Columbia Data Catalogue Datasets API
+  description: The Datasets API from British Columbia Data Catalogue — 4 operation(s) for datasets.
+  humanURL: https://catalogue.data.gov.bc.ca/
+  tags:
+  - Datasets
+  properties:
+  - type: OpenAPI
+    url: openapi/british-columbia-data-catalogue-datasets-api-openapi.yml
+- aid: british-columbia-data-catalogue:british-columbia-data-catalogue-groups-api
+  name: British Columbia Data Catalogue Groups API
+  description: The Groups API from British Columbia Data Catalogue — 2 operation(s) for groups.
+  humanURL: https://catalogue.data.gov.bc.ca/
+  tags:
+  - Groups
+  properties:
+  - type: OpenAPI
+    url: openapi/british-columbia-data-catalogue-groups-api-openapi.yml
+- aid: british-columbia-data-catalogue:british-columbia-data-catalogue-organizations-api
+  name: British Columbia Data Catalogue Organizations API
+  description: >-
+    The Organizations API from British Columbia Data Catalogue — 2 operation(s) for organizations.
+  humanURL: https://catalogue.data.gov.bc.ca/
+  tags:
+  - Organizations
+  properties:
+  - type: OpenAPI
+    url: openapi/british-columbia-data-catalogue-organizations-api-openapi.yml
+- aid: british-columbia-data-catalogue:british-columbia-data-catalogue-resources-api
+  name: British Columbia Data Catalogue Resources API
+  description: The Resources API from British Columbia Data Catalogue — 2 operation(s) for resources.
+  humanURL: https://catalogue.data.gov.bc.ca/
+  tags:
+  - Resources
+  properties:
+  - type: OpenAPI
+    url: openapi/british-columbia-data-catalogue-resources-api-openapi.yml
+- aid: british-columbia-data-catalogue:british-columbia-data-catalogue-site-api
+  name: British Columbia Data Catalogue Site API
+  description: The Site API from British Columbia Data Catalogue — 1 operation(s) for site.
+  humanURL: https://catalogue.data.gov.bc.ca/
+  tags:
+  - Site
+  properties:
+  - type: OpenAPI
+    url: openapi/british-columbia-data-catalogue-site-api-openapi.yml
+- aid: british-columbia-data-catalogue:british-columbia-data-catalogue-tags-api
+  name: British Columbia Data Catalogue Tags API
+  description: The Tags API from British Columbia Data Catalogue — 2 operation(s) for tags.
+  humanURL: https://catalogue.data.gov.bc.ca/
+  tags:
+  - Tags
+  properties:
+  - type: OpenAPI
+    url: openapi/british-columbia-data-catalogue-tags-api-openapi.yml
 common:
   - type: AgenticAccess
     url: agentic-access/british-columbia-data-catalogue-agentic-access.yml
