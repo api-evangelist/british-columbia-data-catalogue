@@ -1,0 +1,24 @@
+{
+  "provider": "british-columbia-data-catalogue",
+  "sources": [
+    "british-columbia-data-catalogue-datasets-api-openapi.yml",
+    "british-columbia-data-catalogue-groups-api-openapi.yml",
+    "british-columbia-data-catalogue-organizations-api-openapi.yml",
+    "british-columbia-data-catalogue-resources-api-openapi.yml",
+    "british-columbia-data-catalogue-site-api-openapi.yml",
+    "british-columbia-data-catalogue-tags-api-openapi.yml"
+  ],
+  "outputs": [
+    "british-columbia-data-catalogue-datasets-api-openapi.yml",
+    "british-columbia-data-catalogue-groups-api-openapi.yml",
+    "british-columbia-data-catalogue-organizations-api-openapi.yml",
+    "british-columbia-data-catalogue-resources-api-openapi.yml",
+    "british-columbia-data-catalogue-site-api-openapi.yml",
+    "british-columbia-data-catalogue-tags-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

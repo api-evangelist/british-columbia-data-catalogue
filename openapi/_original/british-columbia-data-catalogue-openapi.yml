@@ -1,0 +1,221 @@
+openapi: 3.1.0
+info:
+  title: BC Data Catalogue CKAN API
+  description: >-
+    The British Columbia Data Catalogue exposes a CKAN 2.9 API at
+    /api/3/action/ for searching and retrieving open dataset metadata,
+    organizations, groups, tags, and resources without authentication.
+  version: "3"
+  contact:
+    name: BC Data Catalogue
+    url: https://catalogue.data.gov.bc.ca/
+servers:
+  - url: https://catalogue.data.gov.bc.ca/api/3
+    description: Production CKAN API
+paths:
+  /action/status_show:
+    get:
+      summary: Show site status
+      operationId: statusShow
+      tags: [Site]
+      responses:
+        "200":
+          description: Site configuration
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/CkanResponse" }
+  /action/package_search:
+    get:
+      summary: Search datasets
+      operationId: packageSearch
+      tags: [Datasets]
+      parameters:
+        - { name: q, in: query, schema: { type: string }, description: Solr query string }
+        - { name: fq, in: query, schema: { type: string }, description: Filter query }
+        - { name: sort, in: query, schema: { type: string } }
+        - { name: rows, in: query, schema: { type: integer, default: 10 } }
+        - { name: start, in: query, schema: { type: integer, default: 0 } }
+        - { name: facet, in: query, schema: { type: string, enum: ["true", "false"] } }
+        - { name: "facet.field", in: query, schema: { type: string } }
+        - { name: "include_private", in: query, schema: { type: boolean } }
+      responses:
+        "200":
+          description: Search results
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/CkanResponse" }
+  /action/package_list:
+    get:
+      summary: List dataset names
+      operationId: packageList
+      tags: [Datasets]
+      parameters:
+        - { name: limit, in: query, schema: { type: integer } }
+        - { name: offset, in: query, schema: { type: integer } }
+      responses:
+        "200":
+          description: Dataset name list
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/CkanResponse" }
+  /action/package_show:
+    get:
+      summary: Show dataset
+      operationId: packageShow
+      tags: [Datasets]
+      parameters:
+        - { name: id, in: query, required: true, schema: { type: string } }
+        - { name: include_tracking, in: query, schema: { type: boolean } }
+        - { name: use_default_schema, in: query, schema: { type: boolean } }
+      responses:
+        "200":
+          description: Dataset
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/CkanResponse" }
+  /action/current_package_list_with_resources:
+    get:
+      summary: List datasets with resources
+      operationId: currentPackageListWithResources
+      tags: [Datasets]
+      parameters:
+        - { name: limit, in: query, schema: { type: integer } }
+        - { name: offset, in: query, schema: { type: integer } }
+      responses:
+        "200":
+          description: Datasets and resources
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/CkanResponse" }
+  /action/group_list:
+    get:
+      summary: List groups
+      operationId: groupList
+      tags: [Groups]
+      parameters:
+        - { name: sort, in: query, schema: { type: string, enum: [name, package_count, title] } }
+        - { name: limit, in: query, schema: { type: integer } }
+        - { name: offset, in: query, schema: { type: integer } }
+        - { name: all_fields, in: query, schema: { type: boolean } }
+      responses:
+        "200":
+          description: Groups
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/CkanResponse" }
+  /action/group_show:
+    get:
+      summary: Show group
+      operationId: groupShow
+      tags: [Groups]
+      parameters:
+        - { name: id, in: query, required: true, schema: { type: string } }
+        - { name: include_datasets, in: query, schema: { type: boolean } }
+      responses:
+        "200":
+          description: Group
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/CkanResponse" }
+  /action/organization_list:
+    get:
+      summary: List organizations
+      operationId: organizationList
+      tags: [Organizations]
+      parameters:
+        - { name: sort, in: query, schema: { type: string } }
+        - { name: limit, in: query, schema: { type: integer } }
+        - { name: offset, in: query, schema: { type: integer } }
+        - { name: all_fields, in: query, schema: { type: boolean } }
+      responses:
+        "200":
+          description: Organizations
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/CkanResponse" }
+  /action/organization_show:
+    get:
+      summary: Show organization
+      operationId: organizationShow
+      tags: [Organizations]
+      parameters:
+        - { name: id, in: query, required: true, schema: { type: string } }
+        - { name: include_datasets, in: query, schema: { type: boolean } }
+      responses:
+        "200":
+          description: Organization
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/CkanResponse" }
+  /action/resource_show:
+    get:
+      summary: Show resource
+      operationId: resourceShow
+      tags: [Resources]
+      parameters:
+        - { name: id, in: query, required: true, schema: { type: string } }
+        - { name: include_tracking, in: query, schema: { type: boolean } }
+      responses:
+        "200":
+          description: Resource
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/CkanResponse" }
+  /action/resource_search:
+    get:
+      summary: Search resources
+      operationId: resourceSearch
+      tags: [Resources]
+      parameters:
+        - { name: query, in: query, schema: { type: string } }
+        - { name: order_by, in: query, schema: { type: string } }
+        - { name: limit, in: query, schema: { type: integer } }
+        - { name: offset, in: query, schema: { type: integer } }
+      responses:
+        "200":
+          description: Resources
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/CkanResponse" }
+  /action/tag_list:
+    get:
+      summary: List tags
+      operationId: tagList
+      tags: [Tags]
+      parameters:
+        - { name: query, in: query, schema: { type: string } }
+        - { name: vocabulary_id, in: query, schema: { type: string } }
+        - { name: all_fields, in: query, schema: { type: boolean } }
+      responses:
+        "200":
+          description: Tags
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/CkanResponse" }
+  /action/tag_show:
+    get:
+      summary: Show tag
+      operationId: tagShow
+      tags: [Tags]
+      parameters:
+        - { name: id, in: query, required: true, schema: { type: string } }
+        - { name: vocabulary_id, in: query, schema: { type: string } }
+      responses:
+        "200":
+          description: Tag
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/CkanResponse" }
+components:
+  schemas:
+    CkanResponse:
+      type: object
+      properties:
+        help: { type: string }
+        success: { type: boolean }
+        result: {}
+        error:
+          type: object
+          properties:
+            message: { type: string }
+            __type: { type: string }
