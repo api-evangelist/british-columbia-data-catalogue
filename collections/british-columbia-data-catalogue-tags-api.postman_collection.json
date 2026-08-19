@@ -1,0 +1,220 @@
+{
+  "item": [
+    {
+      "id": "bf0c4162-4366-442d-8119-de43e36ef88a",
+      "name": "Tags",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ae35b58d-7f27-4cbc-af68-f19abadf06f0",
+          "name": "List tags",
+          "request": {
+            "name": "List tags",
+            "description": {},
+            "url": {
+              "path": [
+                "action",
+                "tag_list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "vocabulary_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "all_fields",
+                  "value": "<boolean>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8578ce31-12b3-4898-9fe5-8876e95705ec",
+              "name": "Tags",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "action",
+                    "tag_list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "vocabulary_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "all_fields",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"help\": \"string\",\n  \"success\": false,\n  \"result\": \"\",\n  \"error\": {\n    \"message\": \"string\",\n    \"__type\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "136664e5-8181-4da2-8f09-1b99306db4be",
+          "name": "Show tag",
+          "request": {
+            "name": "Show tag",
+            "description": {},
+            "url": {
+              "path": [
+                "action",
+                "tag_show"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "vocabulary_id",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "df054ff3-b33f-4e3c-a1ee-41eb1899d8df",
+              "name": "Tag",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "action",
+                    "tag_show"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "vocabulary_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"help\": \"string\",\n  \"success\": false,\n  \"result\": \"\",\n  \"error\": {\n    \"message\": \"string\",\n    \"__type\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://catalogue.data.gov.bc.ca/api/3",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "d27714e0-6c30-4b0f-a4d0-a644a3d80d0e",
+    "name": "BC Data Catalogue CKAN Datasets Tags API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The British Columbia Data Catalogue exposes a CKAN 2.9 API at /api/3/action/ for searching and retrieving open dataset metadata, organizations, groups, tags, and resources without authentication.\n\nContact Support:\n Name: BC Data Catalogue",
+      "type": "text/plain"
+    }
+  }
+}

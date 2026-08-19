@@ -1,0 +1,229 @@
+{
+  "item": [
+    {
+      "id": "5d59c15a-65ba-4869-9791-0d28b891311f",
+      "name": "Groups",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3b907f89-786f-4624-ac2f-2567e5311e7d",
+          "name": "List groups",
+          "request": {
+            "name": "List groups",
+            "description": {},
+            "url": {
+              "path": [
+                "action",
+                "group_list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "all_fields",
+                  "value": "<boolean>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2d918ce0-3a41-45e8-8724-ec002c73290c",
+              "name": "Groups",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "action",
+                    "group_list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "all_fields",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"help\": \"string\",\n  \"success\": false,\n  \"result\": \"\",\n  \"error\": {\n    \"message\": \"string\",\n    \"__type\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e7538709-07e0-4089-b8ef-8ab24dc95692",
+          "name": "Show group",
+          "request": {
+            "name": "Show group",
+            "description": {},
+            "url": {
+              "path": [
+                "action",
+                "group_show"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "include_datasets",
+                  "value": "<boolean>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "70c3cc80-c711-4d91-92fa-4c850e28faf9",
+              "name": "Group",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "action",
+                    "group_show"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include_datasets",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"help\": \"string\",\n  \"success\": false,\n  \"result\": \"\",\n  \"error\": {\n    \"message\": \"string\",\n    \"__type\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://catalogue.data.gov.bc.ca/api/3",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "562e84f3-0f0d-4336-b593-509fc3e1451c",
+    "name": "BC Data Catalogue CKAN Datasets Groups API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The British Columbia Data Catalogue exposes a CKAN 2.9 API at /api/3/action/ for searching and retrieving open dataset metadata, organizations, groups, tags, and resources without authentication.\n\nContact Support:\n Name: BC Data Catalogue",
+      "type": "text/plain"
+    }
+  }
+}

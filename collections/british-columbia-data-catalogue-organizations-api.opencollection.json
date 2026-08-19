@@ -1,0 +1,74 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "BC Data Catalogue CKAN Datasets Organizations API",
+    "version": "3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Organizations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List organizations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalogue.data.gov.bc.ca/api/3/action/organization_list",
+            "params": [
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "all_fields",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List organizations"
+        },
+        {
+          "info": {
+            "name": "Show organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalogue.data.gov.bc.ca/api/3/action/organization_show",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "include_datasets",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Show organization"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

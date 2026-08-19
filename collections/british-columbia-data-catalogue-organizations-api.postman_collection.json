@@ -1,0 +1,229 @@
+{
+  "item": [
+    {
+      "id": "d78e474c-5c78-4d07-ac85-f6a42528a7d4",
+      "name": "Organizations",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8c7e12b4-2704-4a98-ba7c-f48bdcb4a491",
+          "name": "List organizations",
+          "request": {
+            "name": "List organizations",
+            "description": {},
+            "url": {
+              "path": [
+                "action",
+                "organization_list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "all_fields",
+                  "value": "<boolean>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ae0578db-2d3e-4fb0-bd17-5cb34c6d75a2",
+              "name": "Organizations",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "action",
+                    "organization_list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "all_fields",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"help\": \"string\",\n  \"success\": false,\n  \"result\": \"\",\n  \"error\": {\n    \"message\": \"string\",\n    \"__type\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3dcf296c-a456-4056-a77a-05bc47a6cd14",
+          "name": "Show organization",
+          "request": {
+            "name": "Show organization",
+            "description": {},
+            "url": {
+              "path": [
+                "action",
+                "organization_show"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "include_datasets",
+                  "value": "<boolean>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "95bd0401-743f-4e59-a43f-badd97c1441e",
+              "name": "Organization",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "action",
+                    "organization_show"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include_datasets",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"help\": \"string\",\n  \"success\": false,\n  \"result\": \"\",\n  \"error\": {\n    \"message\": \"string\",\n    \"__type\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://catalogue.data.gov.bc.ca/api/3",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "712d227f-13d5-402a-802b-010ed49a8a8c",
+    "name": "BC Data Catalogue CKAN Datasets Organizations API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The British Columbia Data Catalogue exposes a CKAN 2.9 API at /api/3/action/ for searching and retrieving open dataset metadata, organizations, groups, tags, and resources without authentication.\n\nContact Support:\n Name: BC Data Catalogue",
+      "type": "text/plain"
+    }
+  }
+}

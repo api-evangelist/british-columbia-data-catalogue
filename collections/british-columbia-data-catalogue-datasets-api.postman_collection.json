@@ -1,0 +1,454 @@
+{
+  "item": [
+    {
+      "id": "f89437fb-4c26-4f20-802e-b12b7a9ceba0",
+      "name": "Datasets",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4a939dd2-7251-475e-846e-a5d7c4d8854b",
+          "name": "Search datasets",
+          "request": {
+            "name": "Search datasets",
+            "description": {},
+            "url": {
+              "path": [
+                "action",
+                "package_search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "Solr query string"
+                },
+                {
+                  "disabled": false,
+                  "key": "fq",
+                  "value": "<string>",
+                  "description": "Filter query"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "rows",
+                  "value": "10"
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "0"
+                },
+                {
+                  "disabled": false,
+                  "key": "facet",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "facet.field",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "include_private",
+                  "value": "<boolean>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "473b38c4-9f04-4f22-b569-e139d8640734",
+              "name": "Search results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "action",
+                    "package_search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fq",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rows",
+                      "value": "10"
+                    },
+                    {
+                      "key": "start",
+                      "value": "0"
+                    },
+                    {
+                      "key": "facet",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facet.field",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include_private",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"help\": \"string\",\n  \"success\": false,\n  \"result\": \"\",\n  \"error\": {\n    \"message\": \"string\",\n    \"__type\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9c48f772-44bc-475a-82c8-8637876a0882",
+          "name": "List dataset names",
+          "request": {
+            "name": "List dataset names",
+            "description": {},
+            "url": {
+              "path": [
+                "action",
+                "package_list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a65c8c18-9e6b-45ab-a1cd-ec44d16059b3",
+              "name": "Dataset name list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "action",
+                    "package_list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"help\": \"string\",\n  \"success\": false,\n  \"result\": \"\",\n  \"error\": {\n    \"message\": \"string\",\n    \"__type\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "14567bae-9ca0-4109-b1fe-d5c5616823a4",
+          "name": "Show dataset",
+          "request": {
+            "name": "Show dataset",
+            "description": {},
+            "url": {
+              "path": [
+                "action",
+                "package_show"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "include_tracking",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "use_default_schema",
+                  "value": "<boolean>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "df108144-d149-4820-86fe-4f35ab705c38",
+              "name": "Dataset",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "action",
+                    "package_show"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include_tracking",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "use_default_schema",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"help\": \"string\",\n  \"success\": false,\n  \"result\": \"\",\n  \"error\": {\n    \"message\": \"string\",\n    \"__type\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bef24163-a3d0-4503-a9d1-acdd4f9f8ad0",
+          "name": "List datasets with resources",
+          "request": {
+            "name": "List datasets with resources",
+            "description": {},
+            "url": {
+              "path": [
+                "action",
+                "current_package_list_with_resources"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4d7ee51a-cd29-4379-bd47-855faf3152c3",
+              "name": "Datasets and resources",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "action",
+                    "current_package_list_with_resources"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"help\": \"string\",\n  \"success\": false,\n  \"result\": \"\",\n  \"error\": {\n    \"message\": \"string\",\n    \"__type\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://catalogue.data.gov.bc.ca/api/3",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "44181287-44c7-4334-a588-ccb1fe5c37dd",
+    "name": "BC Data Catalogue CKAN Datasets API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The British Columbia Data Catalogue exposes a CKAN 2.9 API at /api/3/action/ for searching and retrieving open dataset metadata, organizations, groups, tags, and resources without authentication.\n\nContact Support:\n Name: BC Data Catalogue",
+      "type": "text/plain"
+    }
+  }
+}

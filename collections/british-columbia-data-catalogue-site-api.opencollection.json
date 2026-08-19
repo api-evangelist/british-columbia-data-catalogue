@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "BC Data Catalogue CKAN Datasets Site API",
+    "version": "3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Site",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Show site status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalogue.data.gov.bc.ca/api/3/action/status_show"
+          },
+          "docs": "Show site status"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

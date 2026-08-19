@@ -1,0 +1,147 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "BC Data Catalogue CKAN Datasets API",
+    "version": "3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Datasets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search datasets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalogue.data.gov.bc.ca/api/3/action/package_search",
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Solr query string"
+              },
+              {
+                "name": "fq",
+                "value": "",
+                "type": "query",
+                "description": "Filter query"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "rows",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "facet",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "facet.field",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "include_private",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Search datasets"
+        },
+        {
+          "info": {
+            "name": "List dataset names",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalogue.data.gov.bc.ca/api/3/action/package_list",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List dataset names"
+        },
+        {
+          "info": {
+            "name": "Show dataset",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalogue.data.gov.bc.ca/api/3/action/package_show",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "include_tracking",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "use_default_schema",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Show dataset"
+        },
+        {
+          "info": {
+            "name": "List datasets with resources",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalogue.data.gov.bc.ca/api/3/action/current_package_list_with_resources",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List datasets with resources"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

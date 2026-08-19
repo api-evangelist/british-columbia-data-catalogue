@@ -1,0 +1,74 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "BC Data Catalogue CKAN Datasets Groups API",
+    "version": "3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Groups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalogue.data.gov.bc.ca/api/3/action/group_list",
+            "params": [
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "all_fields",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List groups"
+        },
+        {
+          "info": {
+            "name": "Show group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalogue.data.gov.bc.ca/api/3/action/group_show",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "include_datasets",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Show group"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
