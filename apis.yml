@@ -72,6 +72,8 @@ apis:
   description: The Groups API from British Columbia Data Catalogue — 2 operation(s) for groups.
   humanURL: https://catalogue.data.gov.bc.ca/
   tags:
+  - Group
+  tags_raw:
   - Groups
   properties:
   - type: OpenAPI
@@ -82,6 +84,8 @@ apis:
     The Organizations API from British Columbia Data Catalogue — 2 operation(s) for organizations.
   humanURL: https://catalogue.data.gov.bc.ca/
   tags:
+  - Organization
+  tags_raw:
   - Organizations
   properties:
   - type: OpenAPI
