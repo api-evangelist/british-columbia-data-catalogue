@@ -1,0 +1,95 @@
+generated: '2026-09-04'
+method: derived
+source: >-
+  Derived from the first-party OpenAPI at
+  openapi/british-columbia-data-catalogue-bcdc-api-openapi.json after searching for a
+  published server found nothing.
+provider: British Columbia Data Catalogue
+providerId: british-columbia-data-catalogue
+status: candidate
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: none
+  verified: derived
+search_record:
+  - what: Official or community MCP server for the BC Data Catalogue
+    where:
+      - github.com/bcgov (organization search for "mcp")
+      - registry.modelcontextprotocol.io
+      - web search
+    result: >-
+      None. The only MCP repositories in the bcgov organization are bcgov/raven and
+      bcgov/rook, which are internal agent-orchestration projects, not a catalogue server.
+      A third-party Canadian open-government MCP server exists but wraps open.canada.ca,
+      not the B.C. catalogue.
+  - what: Live MCP endpoint on any host in this record
+    where: catalogue.data.gov.bc.ca, data.gov.bc.ca, openmaps.gov.bc.ca
+    result: >-
+      Not probed as a guess. No provider documentation names an MCP path, and guessing one
+      that happens to answer 200 on an SPA catch-all would manufacture a false agent
+      surface — every path on catalogue.data.gov.bc.ca returns the same 200 HTML shell.
+note: >-
+  Nobody ships an MCP server for this catalogue. The tools below are a CANDIDATE list
+  derived from operations that exist and answer anonymously today; they are a design
+  proposal, not a deployed surface. No endpoint is asserted.
+tools:
+  - name: search_datasets
+    description: >-
+      Search the 3,356 datasets in the BC Data Catalogue with a Solr query, optionally
+      faceted.
+    rest:
+      - packageSearch
+    inputSchema_source: GET /action/package_search (q, fq, sort, rows, start, facet, facet.field)
+  - name: list_datasets
+    description: List every dataset name in the catalogue.
+    rest:
+      - packageList
+    inputSchema_source: GET /action/package_list (limit, offset)
+  - name: get_dataset
+    description: Retrieve the full metadata record and resource list for one dataset.
+    rest:
+      - packageShow
+    inputSchema_source: GET /action/package_show (id)
+  - name: list_organizations
+    description: List the 244 B.C. government organizations publishing to the catalogue.
+    rest:
+      - organizationList
+    inputSchema_source: GET /action/organization_list
+  - name: get_organization
+    description: Retrieve one publishing organization and its dataset count.
+    rest:
+      - organizationShow
+    inputSchema_source: GET /action/organization_show (id)
+  - name: list_groups
+    description: List the 26 thematic groups, including the BC Government API Registry.
+    rest:
+      - groupList
+    inputSchema_source: GET /action/group_list
+  - name: get_group
+    description: Retrieve one thematic group.
+    rest:
+      - groupShow
+    inputSchema_source: GET /action/group_show (id)
+  - name: list_tags
+    description: List catalogue tags.
+    rest:
+      - tagList
+    inputSchema_source: GET /action/tag_list
+  - name: get_resource
+    description: Retrieve one data resource (file, API or map service) attached to a dataset.
+    rest:
+      - resourceShow
+    inputSchema_source: GET /action/resource_show (id)
+  - name: search_resources
+    description: Find resources by field, e.g. every WMS-format resource.
+    rest:
+      - resourceSearch
+    inputSchema_source: GET /action/resource_search (query)
+  - name: get_site_status
+    description: Report the catalogue's live CKAN version and enabled extensions.
+    rest:
+      - statusShow
+    inputSchema_source: GET /action/status_show

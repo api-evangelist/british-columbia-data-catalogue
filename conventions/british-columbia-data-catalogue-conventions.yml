@@ -1,0 +1,144 @@
+generated: '2026-09-04'
+method: searched
+source: >-
+  The first-party OpenAPI at github.com/bcgov/api-specs/bcdc/bcdc.json, DataBC's API
+  how-to at bcgov.github.io/data-publication, and live probes of
+  catalogue.data.gov.bc.ca/api/3/action/.
+provider: British Columbia Data Catalogue
+providerId: british-columbia-data-catalogue
+surface_shape:
+  style: RPC-over-HTTP (CKAN Action API)
+  detail: >-
+    Every operation is /api/3/action/{action_name}. There are no REST resource paths and
+    no path parameters — the object is named in the query string (id, name_or_id) on reads
+    and in a JSON body on writes. An agent that assumes REST path semantics will get this
+    API wrong.
+auth:
+  read: none
+  write: api-key
+  header: ckan_api_key
+  detail: >-
+    Public dataset metadata requires no key and no account. Write actions require a
+    catalogue account and its API token in the ckan_api_key header. The catalogue's
+    interactive sign-in is an OpenID Connect SSO plugin (the "sso" extension reported by
+    status_show); the oauth2 block in the published spec points at github.com and is
+    boilerplate, not a BC authorization server.
+  evidence:
+    - https://catalogue.data.gov.bc.ca/api/3/action/status_show
+    - https://bcgov.github.io/data-publication/pages/dps_bcdc_api_w_how_to_use.html
+  see_also: authentication/british-columbia-data-catalogue-authentication.yml
+idempotency:
+  coverage: none
+  mechanism: null
+  header: null
+  scope: []
+  detail: >-
+    No Idempotency-Key header, request-id de-duplication, or replay window is documented
+    or observed anywhere on this surface. The write actions DataBC documents (resource_create, resource_update,
+    resource_patch) and package_create, which a live unauthenticated POST confirmed exists
+    and is gated with HTTP 403, carry no replay protection. An agent with publisher credentials that
+    retries a timed-out write has no protection here.
+  evidence: https://catalogue.data.gov.bc.ca/api/3/action/package_create
+reversibility:
+  grade: none
+  public_surface: na
+  detail: >-
+    For an unauthenticated consumer this API is read-only — all 22 operations in the
+    first-party OpenAPI are GET reads — so reversibility does not arise on the public
+    surface and is `na` there. A credentialed publisher write surface does exist and was
+    confirmed live: POST /api/3/action/package_create returns HTTP 403 "Authorization
+    Error" rather than 404, so the action is present and gated. For that surface the grade
+    is `none`, because DataBC documents NO reversal path: its resource-management guide
+    covers only resource_create, resource_update and resource_patch, and contains no
+    delete, restore, undo, purge, retention or state=active/deleted language anywhere.
+    Upstream CKAN has soft-delete semantics, but this record only reports what THIS
+    provider publishes — inferring a restore path and a window from the upstream project
+    would be exactly the kind of assumption that could cost a publisher a dataset.
+  write_surface: publisher-only (requires an account and a ckan_api_key token)
+  documented_write_actions:
+    - resource_create
+    - resource_update
+    - resource_patch
+  documented_reversal_actions: []
+  window: null
+  window_source: null
+  evidence:
+    - url: https://catalogue.data.gov.bc.ca/api/3/action/package_create
+      status: 403
+      note: 'POST, unauthenticated — {"error":{"__type":"Authorization Error"},"success":false}'
+    - url: https://bcgov.github.io/data-publication/pages/dps_bcdc_api_w_resource_mgmt.html
+      status: 200
+      note: DataBC's own resource-management guide; no deletion or restoration is described.
+  remedy: >-
+    Publishing the delete/restore actions the catalogue supports, and the window before a
+    soft-deleted record is purged, would move this from none to verified and is the single
+    cheapest agent-safety improvement available on this surface.
+dry_run_mode:
+  supported: false
+  detail: No preview, validate-only or dry-run parameter is documented on any write action.
+pagination:
+  styles:
+    - actions:
+        - package_list
+        - organization_list_for_user
+      params:
+        limit: page size
+        offset: rows to skip
+    - actions:
+        - package_search
+        - resource_search
+      params:
+        rows: page size
+        start: rows to skip
+      response_fields:
+        count: total matching records (3,356 datasets catalogue-wide at time of probe)
+        results: the page of records
+      note: >-
+        package_search is a Solr query surface — q takes Solr syntax including field
+        queries (res_format:wms, license_id:2, res_extras_bcdc_type:geographic) and
+        faceting via facet / facet.field.
+  cursor: false
+  link_header: false
+  evidence: https://bcgov.github.io/data-publication/pages/dps_bcdc_api_w_common_calls.html
+field_selection:
+  expansion: false
+  sparse_fieldsets: false
+  detail: >-
+    No expand/fields/include parameter set. package_search returns whole package objects
+    including every resource; include_private and include_drafts are the only content
+    toggles.
+metadata:
+  schema_discovery: true
+  action: scheming_dataset_schema_show
+  detail: >-
+    The catalogue runs ckanext-scheming with a BC-specific schema (bcgov_schema,
+    scheming_datasets). scheming_dataset_schema_show?type=bcdc_dataset returns the field
+    definitions, which is how a client learns the BC-only extras (bcdc_type,
+    object_name, resource_storage_location) that the search examples query against.
+  evidence: https://catalogue.data.gov.bc.ca/api/3/action/scheming_dataset_schema_show?type=bcdc_dataset
+tracing:
+  request_id_header: null
+  detail: >-
+    No request id is returned. The only correlation-adjacent headers observed are
+    x-kong-upstream-latency and x-kong-proxy-latency from the Kong gateway in front of the
+    catalogue; neither is an id a client can quote in a support ticket.
+  evidence: 'HEAD https://catalogue.data.gov.bc.ca/api/3/action/package_list?limit=1'
+versioning:
+  see: lifecycle/british-columbia-data-catalogue-lifecycle.yml
+  summary: Major version in path (/api/3/); confirm live version via status_show.
+errors:
+  see: errors/british-columbia-data-catalogue-problem-types.yml
+  summary: >-
+    CKAN envelope {help, error:{__type, message}, success:false}; branch on success, not
+    on the status code. Not RFC 9457.
+rate_limit_signaling:
+  see: rate-limits/british-columbia-data-catalogue-rate-limits.yml
+  headers_returned: []
+  summary: No RateLimit-*, X-RateLimit-* or Retry-After headers are returned.
+content_negotiation:
+  formats:
+    - application/json
+  detail: >-
+    The Action API answers JSON only. The geospatial surface at openmaps.gov.bc.ca
+    negotiates far more — image/png, application/json;type=geojson, topojson, KML, PDF and
+    Atom are all advertised in the WMS GetCapabilities.

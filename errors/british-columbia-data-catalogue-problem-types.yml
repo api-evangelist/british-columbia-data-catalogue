@@ -1,0 +1,75 @@
+generated: '2026-09-04'
+method: probed
+source: >-
+  Live unauthenticated requests against https://catalogue.data.gov.bc.ca/api/3/action/,
+  each response captured with its HTTP status code and body.
+provider: British Columbia Data Catalogue
+providerId: british-columbia-data-catalogue
+format: ckan-action-envelope
+rfc9457: false
+content_type: application/json;charset=utf-8
+envelope:
+  description: >-
+    CKAN's Action API returns the same envelope on success and failure. success is the
+    field a client must branch on; the HTTP status alone is not enough, because CKAN can
+    return 200 with success:false in some deployments.
+  fields:
+    help: URL of the help_show page for the action that failed
+    success: boolean — false on error
+    error.__type: the CKAN error class, e.g. "Not Found Error", "Validation Error"
+    error.message: human-readable message (absent on Validation Error, which returns per-field arrays)
+  exception: >-
+    Malformed requests rejected before CKAN's action dispatcher return a BARE JSON STRING,
+    not the envelope — e.g. "Bad request - Action name not known: ...". A client parsing
+    for .error will get undefined on these.
+problem_types:
+  - id: not-found
+    status: 404
+    type: Not Found Error
+    title: Requested object does not exist
+    detail: 'error.message = "Not found"'
+    evidence: https://catalogue.data.gov.bc.ca/api/3/action/package_show?id=definitely-not-a-real-dataset-xyz
+    body: '{"help": "...", "error": {"__type": "Not Found Error", "message": "Not found"}, "success": false}'
+    remediation: >-
+      Confirm the dataset name or id with package_list or package_search before calling
+      package_show. Names are slugs, not titles.
+  - id: validation-error
+    status: 409
+    type: Validation Error
+    title: Required parameter missing or invalid
+    detail: >-
+      error carries one key per invalid field whose value is an array of messages, e.g.
+      {"name_or_id": ["Missing value"]}. There is no error.message on this shape.
+    evidence: https://catalogue.data.gov.bc.ca/api/3/action/package_show
+    remediation: >-
+      Read the field keys under error rather than error.message. 409 here means a bad
+      request, not a resource conflict — CKAN's use of 409 diverges from common REST practice.
+  - id: authorization-error
+    status: 403
+    type: Authorization Error
+    title: Caller not authorized for this action
+    detail: 'error.message = "Access denied: User  not authorized to create packages"'
+    evidence: https://catalogue.data.gov.bc.ca/api/3/action/package_create
+    remediation: >-
+      Every write action requires a catalogue account and a ckan_api_key header. Read
+      actions on public datasets require none.
+  - id: bad-request
+    status: 400
+    type: bare-string
+    title: Request rejected before action dispatch
+    detail: >-
+      Body is a bare JSON string, e.g. "Bad request - Action name not known: <name>" for
+      an unknown action, or "Bad request - JSON Error: Invalid request. Please use POST
+      method for your request" when a write action is called with GET.
+    evidence: https://catalogue.data.gov.bc.ca/api/3/action/package_create
+    remediation: >-
+      Handle a non-object JSON body as a distinct failure mode. Use POST for every write
+      action; GET is only valid on read actions.
+  - id: rate-limited
+    status: 429
+    type: null
+    observed: false
+    detail: >-
+      No 429 was observed and no rate-limit headers are returned (see rate-limits/). This
+      entry records that the failure mode is undocumented, not that it cannot occur — the
+      surface sits behind a Kong gateway (x-kong-* response headers).

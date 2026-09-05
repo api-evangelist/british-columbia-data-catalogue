@@ -1,0 +1,119 @@
+generated: '2026-09-04'
+method: searched
+source: >-
+  The first-party OpenAPI at github.com/bcgov/api-specs (bcdc/bcdc.json), live
+  GetCapabilities documents fetched from the DataBC public OWS endpoint, and the live
+  CKAN Action API at catalogue.data.gov.bc.ca/api/3/action/.
+provider: British Columbia Data Catalogue
+providerId: british-columbia-data-catalogue
+note: >-
+  Every entry below is backed by a document that was fetched, not by a marketing claim.
+  The two OGC entries are the strongest signal in this record: they are self-describing
+  contracts saved verbatim in openapi/, and their conformance is asserted by the XML root
+  element and version attribute, not inferred.
+conformance:
+  - id: openapi-3.0
+    name: OpenAPI Specification 3.0
+    conforms: true
+    evidence: https://raw.githubusercontent.com/bcgov/api-specs/master/bcdc/bcdc.json
+    detail: >-
+      DataBC publishes a first-party OpenAPI 3.0.0 document for the BC Data Catalogue API
+      covering 22 CKAN Action operations, with servers[] naming the production, test and
+      delivery catalogues.
+  - id: ogc-wms-1.3.0
+    name: OGC Web Map Service 1.3.0
+    conforms: true
+    evidence: https://openmaps.gov.bc.ca/geo/pub/ows?service=WMS&request=GetCapabilities&version=1.3.0
+    artifact: openapi/british-columbia-data-catalogue-databc-pub-wms-capabilities.xml
+    detail: >-
+      HTTP 200, XML root <WMS_Capabilities version="1.3.0"> in the
+      http://www.opengis.net/wms namespace, advertising 895 queryable layers from the BC
+      Geographic Warehouse. Saved verbatim; not generated.
+  - id: ogc-wfs-2.0.0
+    name: OGC Web Feature Service 2.0.0
+    conforms: true
+    evidence: https://openmaps.gov.bc.ca/geo/pub/ows?service=WFS&request=GetCapabilities&version=2.0.0
+    artifact: openapi/british-columbia-data-catalogue-databc-pub-wfs-capabilities.xml
+    detail: >-
+      HTTP 200, XML root <wfs:WFS_Capabilities version="2.0.0"> declaring 896 feature
+      types and advertising 1.0.0, 1.1.0 and 2.0.0. ows:ServiceProvider names DataBC,
+      contact datamaps@gov.bc.ca. Saved verbatim.
+  - id: ogc-wmts
+    name: OGC Web Map Tile Service
+    conforms: false
+    evidence: https://openmaps.gov.bc.ca/geo/pub/ows?service=WMTS&request=GetCapabilities
+    detail: Returns an ows:ExceptionReport, not a Capabilities document. Probed, absent.
+  - id: ogc-wcs
+    name: OGC Web Coverage Service
+    conforms: false
+    evidence: https://openmaps.gov.bc.ca/geo/pub/ows?service=WCS&request=GetCapabilities&version=2.0.1
+    detail: Returns an ows:ExceptionReport, not a Capabilities document. Probed, absent.
+  - id: ogc-csw
+    name: OGC Catalogue Service for the Web
+    conforms: false
+    evidence: https://openmaps.gov.bc.ca/geo/pub/csw?service=CSW&request=GetCapabilities
+    detail: >-
+      HTTP 404. Catalogue metadata is served through the CKAN Action API rather than CSW,
+      so a discovery client speaking CSW cannot reach this catalogue.
+  - id: ogc-api-features
+    name: OGC API - Features
+    conforms: false
+    evidence: https://openmaps.gov.bc.ca/geo/pub/ogcapi/conformance
+    detail: >-
+      HTTP 404 with {"message":"File Not Found"}. DataBC serves the classic OWS stack only;
+      no modern OGC API landing page or conformance declaration was found.
+  - id: ckan-action-api-3
+    name: CKAN Action API v3
+    conforms: true
+    evidence: https://catalogue.data.gov.bc.ca/api/3/action/status_show
+    detail: >-
+      status_show reports ckan_version 2.9.5 and the /api/3/action/ envelope
+      {help, success, result}. CKAN's Action API is the de facto interoperability contract
+      for open-data portals; a client written against data.gov or data.gov.uk works here
+      unchanged.
+  - id: rfc9457
+    name: RFC 9457 Problem Details for HTTP APIs
+    conforms: false
+    evidence: https://catalogue.data.gov.bc.ca/api/3/action/package_show?id=definitely-not-a-real-dataset-xyz
+    detail: >-
+      Errors return the CKAN envelope {help, error:{__type, message}, success:false} as
+      application/json, not application/problem+json. See errors/.
+  - id: oauth2
+    name: OAuth 2.0
+    conforms: false
+    evidence: https://raw.githubusercontent.com/bcgov/api-specs/master/bcdc/bcdc.json
+    detail: >-
+      The spec carries an oauth2 securityScheme named githubAccessCode whose
+      authorizationUrl is github.com/login/oauth/authorize and whose scope list is
+      GitHub's own (repo, gist, delete_repo, admin:org). It is Swagger-editor boilerplate,
+      not a BC Data Catalogue authorization server, and is recorded here as
+      non-conformant so it is never read as a BC OAuth surface. The catalogue's real
+      sign-in is an OpenID Connect SSO plugin (the "sso" extension listed by status_show).
+  - id: pagination
+    name: Offset pagination
+    conforms: true
+    evidence: https://bcgov.github.io/data-publication/pages/dps_bcdc_api_w_common_calls.html
+    detail: >-
+      package_list takes limit/offset; package_search takes rows/start over the Solr index.
+      Documented in DataBC's own API how-to and present in the first-party spec.
+domain_standards:
+  - id: ogc-ows
+    name: OGC Web Services (WMS/WFS) — the geospatial domain standard
+    conforms: true
+    evidence: https://openmaps.gov.bc.ca/geo/pub/ows?service=WFS&request=GetCapabilities&version=2.0.0
+    spec_location: >-
+      openapi/british-columbia-data-catalogue-databc-pub-wfs-capabilities.xml —
+      root element wfs:WFS_Capabilities, namespace http://www.opengis.net/wfs/2.0,
+      ows:ServiceIdentification/ows:ServiceType = WFS
+    detail: >-
+      884 of the catalogue's datasets publish a WMS resource pointing at this endpoint, so
+      a GIS client that already speaks WFS/WMS consumes B.C. spatial data with no bespoke
+      connector. This is the contract DECLARING the standard, not a prose claim.
+  - id: open-government-licence-bc
+    name: Open Government Licence — British Columbia
+    conforms: true
+    evidence: https://www2.gov.bc.ca/gov/content?id=A519A56BC2BF44E4A008B33FCF527F61
+    spec_location: 'bcdc/bcdc.json info.license.name = "Open Government License - British Columbia"'
+    detail: >-
+      The contract itself names the licence, so a consuming agent can read the reuse terms
+      from the spec rather than from a web page.

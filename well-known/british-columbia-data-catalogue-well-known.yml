@@ -1,0 +1,239 @@
+generated: '2026-09-04'
+method: probed
+source: live HTTPS probes of every host in apis.yml + OpenAPI servers[] + the OGC OWS host, each paired
+  with a control probe
+provider: British Columbia Data Catalogue
+providerId: british-columbia-data-catalogue
+summary:
+  hosts_probed: 6
+  paths_per_host: 8
+  documents_served: 0
+note: 'No /.well-known document is served on any Government of B.C. host in this record. catalogue.data.gov.bc.ca
+  and data.gov.bc.ca are a client-side SPA whose catch-all answers HTTP 200 with the identical 37,599-byte
+  shell for every path INCLUDING the control probe, so every 200 here is a soft-404, not a document. cat.data.gov.bc.ca
+  (the published test environment), openmaps.gov.bc.ca (DataBC OGC services) and www2.gov.bc.ca return
+  honest 404s. No WellKnown, SecurityTxt or AgentCard pointer is emitted: this file records a measured
+  absence, not a presence.'
+hosts:
+- host: catalogue.data.gov.bc.ca
+  control_probe:
+    path: /.well-known/api-evangelist-control-probe-does-not-exist
+    status: 200
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    file: null
+    verdict: soft-404
+  - path: /.well-known/openid-configuration
+    status: 200
+    file: null
+    verdict: soft-404
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    file: null
+    verdict: soft-404
+  - path: /.well-known/oauth-protected-resource
+    status: 200
+    file: null
+    verdict: soft-404
+  - path: /.well-known/api-catalog
+    status: 200
+    file: null
+    verdict: soft-404
+  - path: /.well-known/ai-plugin.json
+    status: 200
+    file: null
+    verdict: soft-404
+  - path: /.well-known/agent-card.json
+    status: 200
+    file: null
+    verdict: soft-404
+  - path: /.well-known/agent.json
+    status: 200
+    file: null
+    verdict: soft-404
+- host: data.gov.bc.ca
+  control_probe:
+    path: /.well-known/api-evangelist-control-probe-does-not-exist
+    status: 200
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    file: null
+    verdict: soft-404
+  - path: /.well-known/openid-configuration
+    status: 200
+    file: null
+    verdict: soft-404
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    file: null
+    verdict: soft-404
+  - path: /.well-known/oauth-protected-resource
+    status: 200
+    file: null
+    verdict: soft-404
+  - path: /.well-known/api-catalog
+    status: 200
+    file: null
+    verdict: soft-404
+  - path: /.well-known/ai-plugin.json
+    status: 200
+    file: null
+    verdict: soft-404
+  - path: /.well-known/agent-card.json
+    status: 200
+    file: null
+    verdict: soft-404
+  - path: /.well-known/agent.json
+    status: 200
+    file: null
+    verdict: soft-404
+- host: cat.data.gov.bc.ca
+  control_probe:
+    path: /.well-known/api-evangelist-control-probe-does-not-exist
+    status: 404
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+    file: null
+    verdict: absent
+  - path: /.well-known/openid-configuration
+    status: 404
+    file: null
+    verdict: absent
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+    file: null
+    verdict: absent
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+    file: null
+    verdict: absent
+  - path: /.well-known/api-catalog
+    status: 404
+    file: null
+    verdict: absent
+  - path: /.well-known/ai-plugin.json
+    status: 404
+    file: null
+    verdict: absent
+  - path: /.well-known/agent-card.json
+    status: 404
+    file: null
+    verdict: absent
+  - path: /.well-known/agent.json
+    status: 404
+    file: null
+    verdict: absent
+- host: openmaps.gov.bc.ca
+  control_probe:
+    path: /.well-known/api-evangelist-control-probe-does-not-exist
+    status: 404
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+    file: null
+    verdict: soft-404
+  - path: /.well-known/openid-configuration
+    status: 404
+    file: null
+    verdict: soft-404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+    file: null
+    verdict: soft-404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+    file: null
+    verdict: soft-404
+  - path: /.well-known/api-catalog
+    status: 404
+    file: null
+    verdict: soft-404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+    file: null
+    verdict: soft-404
+  - path: /.well-known/agent-card.json
+    status: 404
+    file: null
+    verdict: soft-404
+  - path: /.well-known/agent.json
+    status: 404
+    file: null
+    verdict: soft-404
+- host: www2.gov.bc.ca
+  control_probe:
+    path: /.well-known/api-evangelist-control-probe-does-not-exist
+    status: 404
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+    file: null
+    verdict: soft-404
+  - path: /.well-known/openid-configuration
+    status: 404
+    file: null
+    verdict: soft-404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+    file: null
+    verdict: soft-404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+    file: null
+    verdict: soft-404
+  - path: /.well-known/api-catalog
+    status: 404
+    file: null
+    verdict: soft-404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+    file: null
+    verdict: soft-404
+  - path: /.well-known/agent-card.json
+    status: 404
+    file: null
+    verdict: soft-404
+  - path: /.well-known/agent.json
+    status: 404
+    file: null
+    verdict: soft-404
+- host: www.gov.bc.ca
+  control_probe:
+    path: /.well-known/api-evangelist-control-probe-does-not-exist
+    status: 404
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+    file: null
+    verdict: soft-404
+  - path: /.well-known/openid-configuration
+    status: 404
+    file: null
+    verdict: soft-404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+    file: null
+    verdict: soft-404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+    file: null
+    verdict: soft-404
+  - path: /.well-known/api-catalog
+    status: 404
+    file: null
+    verdict: soft-404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+    file: null
+    verdict: soft-404
+  - path: /.well-known/agent-card.json
+    status: 404
+    file: null
+    verdict: soft-404
+  - path: /.well-known/agent.json
+    status: 404
+    file: null
+    verdict: soft-404

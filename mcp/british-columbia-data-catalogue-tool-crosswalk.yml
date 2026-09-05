@@ -1,0 +1,119 @@
+generated: '2026-09-04'
+method: derived
+source: >-
+  Bound the candidate tool list in mcp/british-columbia-data-catalogue-mcp.yml to the
+  operationIds in the refined OpenAPI documents under openapi/.
+provider: British Columbia Data Catalogue
+providerId: british-columbia-data-catalogue
+note: >-
+  There is no deployed MCP server and no GraphQL surface here, so this crosswalk maps a
+  CANDIDATE tool list onto real, callable REST operations. Confidence is high on every row
+  because each tool is a one-to-one wrapper of an operation whose parameters were read from
+  the spec, not guessed — but the tools themselves do not exist yet.
+surfaces:
+  openapi:
+    - openapi/british-columbia-data-catalogue-bcdc-api-openapi.json
+    - openapi/british-columbia-data-catalogue-datasets-api-openapi.yml
+    - openapi/british-columbia-data-catalogue-organizations-api-openapi.yml
+    - openapi/british-columbia-data-catalogue-groups-api-openapi.yml
+    - openapi/british-columbia-data-catalogue-resources-api-openapi.yml
+    - openapi/british-columbia-data-catalogue-tags-api-openapi.yml
+    - openapi/british-columbia-data-catalogue-site-api-openapi.yml
+  graphql: null
+  mcp: null
+  ogc:
+    - openapi/british-columbia-data-catalogue-databc-pub-wms-capabilities.xml
+    - openapi/british-columbia-data-catalogue-databc-pub-wfs-capabilities.xml
+  gated: []
+crosswalk:
+  - tool: search_datasets
+    category: discovery
+    rest:
+      - packageSearch
+    binding: one-to-one
+    confidence: high
+  - tool: list_datasets
+    category: discovery
+    rest:
+      - packageList
+    binding: one-to-one
+    confidence: high
+  - tool: get_dataset
+    category: retrieval
+    rest:
+      - packageShow
+    binding: one-to-one
+    confidence: high
+  - tool: list_organizations
+    category: directory
+    rest:
+      - organizationList
+    binding: one-to-one
+    confidence: high
+  - tool: get_organization
+    category: directory
+    rest:
+      - organizationShow
+    binding: one-to-one
+    confidence: high
+  - tool: list_groups
+    category: directory
+    rest:
+      - groupList
+    binding: one-to-one
+    confidence: high
+  - tool: get_group
+    category: directory
+    rest:
+      - groupShow
+    binding: one-to-one
+    confidence: high
+  - tool: list_tags
+    category: taxonomy
+    rest:
+      - tagList
+    binding: one-to-one
+    confidence: high
+  - tool: get_resource
+    category: retrieval
+    rest:
+      - resourceShow
+    binding: one-to-one
+    confidence: high
+  - tool: search_resources
+    category: discovery
+    rest:
+      - resourceSearch
+    binding: one-to-one
+    confidence: high
+  - tool: get_site_status
+    category: operations
+    rest:
+      - statusShow
+    binding: one-to-one
+    confidence: high
+mcp_only: []
+rest_only:
+  - operationId: tagShow
+    reason: Covered indirectly by search_datasets with an fq on tags; no dedicated tool proposed.
+  - operationId: currentPackageListWithResources
+    reason: >-
+      Bulk export of every dataset with resources. Too large for a tool response; belongs
+      behind a bulk-download path, not an MCP tool.
+  - operationId: package_activity_list
+    reason: >-
+      Present in the first-party spec but returns user activity streams — excluded from the
+      candidate tool list on privacy grounds, not capability grounds.
+unmapped_surface:
+  - surface: DataBC OGC WMS/WFS (895 layers, 896 feature types)
+    reason: >-
+      The geospatial contract is OGC, not OpenAPI, and its operations (GetCapabilities,
+      GetMap, GetFeature) are query-string verbs rather than named REST operations. It is
+      the larger half of this provider's callable surface and has no tool binding here.
+coverage:
+  tools_total: 11
+  tools_bound: 11
+  rest_operations_total: 13
+  rest_operations_bound: 11
+  rest_only: 3
+  mcp_only: 0

@@ -1,0 +1,85 @@
+generated: '2026-09-04'
+method: searched
+source: >-
+  github.com/bcgov/api-specs (the first-party spec and its README),
+  bcgov.github.io/data-publication (DataBC's publication documentation) and the live
+  status_show action.
+provider: British Columbia Data Catalogue
+providerId: british-columbia-data-catalogue
+versioning:
+  scheme: path
+  pattern: /api/{n}/action/{action}
+  current: '3'
+  spec_version: 3.0.1
+  platform_version: CKAN 2.9.5
+  evidence: https://catalogue.data.gov.bc.ca/api/3/action/status_show
+  detail: >-
+    The API major version is carried in the path (/api/3/). The provider's own spec
+    instructs clients to confirm the live version by calling status_show rather than
+    assuming it, which is an unusually explicit versioning contract for an open-data portal.
+  spec_lifecycle:
+    evidence: https://github.com/bcgov/api-specs
+    current: OAS 3.0.1
+    deprecated: OAS 2.0.0
+    detail: >-
+      bcgov/api-specs publishes an explicit support matrix for the specification format
+      itself — current OAS 3.0.1, deprecated OAS 2.0.0 — and carries a "Lifecycle: Stable"
+      badge on the repository.
+environments:
+  - name: Production
+    url: https://catalogue.data.gov.bc.ca/api/3
+    status: 200
+    checked: '2026-09-04'
+  - name: Test
+    url: https://cat.data.gov.bc.ca/api/3
+    status: 200
+    checked: '2026-09-04'
+    note: >-
+      Live and unauthenticated. Its status_show help URL resolves to an internal hostname
+      (toyger.data.gov.bc.ca), confirming it is a separate deployment rather than an alias.
+  - name: Delivery
+    url: https://cad.data.gov.bc.ca/api/3
+    status: 0
+    checked: '2026-09-04'
+    note: >-
+      Named in the first-party spec's servers[] but did not resolve or connect from this
+      probe. Recorded as declared-but-unreachable, not as removed.
+deprecation:
+  policy_published: false
+  sunset_header: false
+  deprecation_header: false
+  rfc8594: false
+  detail: >-
+    No deprecation or sunset policy is published for the catalogue API, and no Deprecation
+    or Sunset response headers were observed. The spec marks no operation deprecated.
+  operations_marked_deprecated: []
+  note: >-
+    Several operations the spec still lists — package_revision_list,
+    organization_revision_list, related_list, package_activity_list_html — were removed or
+    reworked in CKAN after 2.9. They are recorded here as a stale-contract risk, not as a
+    provider deprecation notice, because DataBC publishes no such notice.
+sla:
+  published: false
+  detail: No service level agreement or availability target is published for the catalogue API.
+status_page:
+  published: false
+  probed:
+    - url: https://status.data.gov.bc.ca/
+      status: 0
+      note: Did not resolve or connect.
+  detail: >-
+    No status page was found for the BC Data Catalogue. No StatusPage pointer is emitted.
+changelog:
+  published: false
+  detail: >-
+    DataBC publishes no dated changelog for the catalogue API. The only dated release
+    history in this surface belongs to the R client (github.com/bcgov/bcdata/releases),
+    which is the SDK's changelog, not the API's. No ChangeLog artifact or pointer is
+    emitted rather than passing an SDK history off as the API's.
+support:
+  contact_email: data@gov.bc.ca
+  errors_email: datacat@gov.bc.ca
+  geospatial_contact: datamaps@gov.bc.ca
+  evidence:
+    - https://raw.githubusercontent.com/bcgov/api-specs/master/bcdc/bcdc.json
+    - https://catalogue.data.gov.bc.ca/api/3/action/status_show

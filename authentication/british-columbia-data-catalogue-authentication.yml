@@ -1,0 +1,82 @@
+generated: '2026-09-04'
+method: searched
+source: >-
+  openapi/british-columbia-data-catalogue-bcdc-api-openapi.json (the first-party spec),
+  https://bcgov.github.io/data-publication/pages/dps_bcdc_api_w_how_to_use.html,
+  https://bcgov.github.io/data-publication/pages/dps_bcdc_api_w_resource_mgmt.html, and a
+  live probe of POST /api/3/action/package_create.
+docs: https://bcgov.github.io/data-publication/pages/dps_bcdc_api_w_how_to_use.html
+provider: British Columbia Data Catalogue
+providerId: british-columbia-data-catalogue
+summary:
+  types:
+    - none
+    - apiKey
+  api_key_in:
+    - header
+  read_access: anonymous
+  write_access: api-key
+headline: >-
+  Public reads need no credential at all. DataBC states it plainly: "You do not need an API
+  key nor an account if you are only accessing publicly available data." Writes need a
+  catalogue account with editor/publisher rights and its token in the ckan_api_key header.
+schemes:
+  - name: none
+    type: none
+    applies_to: all public read actions
+    detail: >-
+      package_search, package_list, package_show, organization_*, group_*, tag_* and
+      resource_* answered anonymously on every probe.
+    evidence: https://catalogue.data.gov.bc.ca/api/3/action/status_show
+  - name: internalApiKey
+    type: apiKey
+    in: header
+    parameter: ckan_api_key
+    applies_to: write actions
+    obtained_from: >-
+      Account Settings after signing in to catalogue.data.gov.bc.ca. Requires
+      editor/publisher rights in a B.C. government organization — an internal entitlement,
+      not a self-service signup.
+    sources:
+      - openapi/british-columbia-data-catalogue-bcdc-api-openapi.json
+      - https://bcgov.github.io/data-publication/pages/dps_bcdc_api_w_resource_mgmt.html
+    evidence:
+      url: https://catalogue.data.gov.bc.ca/api/3/action/package_create
+      method: POST
+      status: 403
+      body: '{"error": {"__type": "Authorization Error", "message": "Access denied: User  not authorized to create packages"}, "success": false}'
+  - name: githubAccessCode
+    type: oauth2
+    applies_to: nothing
+    disregard: true
+    declared_in: openapi/british-columbia-data-catalogue-bcdc-api-openapi.json
+    flows:
+      - flow: authorizationCode
+        authorizationUrl: https://github.com/login/oauth/authorize
+        tokenUrl: https://github.com/login/oauth/access_token
+        scopes: 19
+    finding: >-
+      This oauth2 scheme is Swagger-editor boilerplate, NOT a BC Data Catalogue
+      authorization server. Its endpoints are github.com and its 19 scopes are GitHub's own
+      (repo, gist, delete_repo, admin:org, write:public_key). Treating it as a BC OAuth
+      surface would credit the Province with an authorization server it does not operate
+      and would hand an agent a scope list that has nothing to do with B.C. data. No
+      OAuthScopes artifact or pointer is emitted for this provider for the same reason.
+    remedy: >-
+      Removing the githubAccessCode block from bcdc.json, or replacing it with the
+      catalogue's real OpenID Connect metadata, would make the contract's security section
+      truthful.
+sso:
+  protocol: OpenID Connect
+  applies_to: interactive sign-in to the catalogue web application
+  evidence:
+    - url: https://catalogue.data.gov.bc.ca/api/3/action/status_show
+      note: 'extensions[] includes "sso"'
+    - url: https://github.com/bcgov/ckanext-sso
+      note: '"OpenID connect plugin for CKAN used by the B.C. Catalogue."'
+  discovery_document: null
+  discovery_note: >-
+    No /.well-known/openid-configuration is served on any host in this record — every
+    probe returned the SPA catch-all or a 404. See
+    well-known/british-columbia-data-catalogue-well-known.yml.
+mtls: false

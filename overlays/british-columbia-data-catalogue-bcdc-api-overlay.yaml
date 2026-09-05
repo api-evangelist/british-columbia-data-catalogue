@@ -1,0 +1,139 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements — BC Data Catalogue API
+  version: 1.0.0
+extends: openapi/british-columbia-data-catalogue-bcdc-api-openapi.json
+x-generated: '2026-09-04'
+x-method: generated
+x-source: >-
+  Enhancements observed by API Evangelist from live probes of
+  catalogue.data.gov.bc.ca/api/3/action/ and from the DataBC documentation at
+  bcgov.github.io/data-publication. Applied as an overlay so the first-party contract in
+  openapi/ stays byte-for-byte as DataBC published it.
+actions:
+  - target: $.info
+    description: Record the licence and terms as machine-readable extensions and note the schema gap.
+    update:
+      x-apis-io-provider: british-columbia-data-catalogue
+      x-licence-id: OGL-BC
+      x-terms-of-use: https://www2.gov.bc.ca/gov/content?id=D1EE0A405E584363B205CD4353E02C88
+      x-contract-gap: >-
+        components.schemas is empty and every operation documents only a bare "200"
+        response. Response shapes for Package, Organization, Group, Resource and Tag were
+        observed live and are catalogued in
+        data-model/british-columbia-data-catalogue-data-model.yml.
+  - target: $.info
+    description: Attach the observed error envelope, which the contract does not describe.
+    update:
+      x-error-envelope:
+        format: ckan-action-envelope
+        rfc9457: false
+        fields:
+          - help
+          - success
+          - error.__type
+          - error.message
+        statuses:
+          '400': Bare JSON string, not the envelope. Request rejected before action dispatch.
+          '403': Authorization Error — write action without a ckan_api_key.
+          '404': Not Found Error — unknown dataset name or id.
+          '409': Validation Error — per-field arrays under error, no error.message.
+        catalog: errors/british-columbia-data-catalogue-problem-types.yml
+  - target: $.info
+    description: Record the absence of rate-limit signalling as an explicit, machine-readable fact.
+    update:
+      x-rate-limit:
+        documented: false
+        headers: []
+        note: >-
+          No RateLimit-*, X-RateLimit-* or Retry-After header is returned. Kong gateway
+          headers (x-kong-upstream-latency, x-kong-proxy-latency) are the only extras.
+  - target: $.servers
+    description: Record the live reachability of each declared environment as probed on 2026-09-04.
+    update:
+      - url: https://catalogue.data.gov.bc.ca/api/3
+        description: Production
+        x-probed:
+          status: 200
+          checked: '2026-09-04'
+      - url: https://cat.data.gov.bc.ca/api/3
+        description: Test
+        x-probed:
+          status: 200
+          checked: '2026-09-04'
+          note: Live and anonymous; usable as a sandbox.
+      - url: https://cad.data.gov.bc.ca/api/3
+        description: Delivery
+        x-probed:
+          status: 0
+          checked: '2026-09-04'
+          note: Declared in the contract but did not resolve or connect.
+  - target: $.components.securitySchemes.githubAccessCode
+    description: >-
+      Flag the oauth2 scheme as Swagger-editor boilerplate. Its authorizationUrl is
+      github.com and its scopes are GitHub's own (repo, gist, delete_repo, admin:org). It
+      is not a BC Data Catalogue authorization server and no client should attempt it.
+    update:
+      x-not-applicable: true
+      x-note: >-
+        Boilerplate carried over from the Swagger editor. The catalogue's interactive
+        sign-in is an OpenID Connect SSO plugin (the "sso" extension reported by
+        status_show). The only credential this API accepts is the ckan_api_key header.
+  - target: $.components.securitySchemes.internalApiKey
+    description: Clarify where the CKAN API token comes from and what it is needed for.
+    update:
+      x-applies-to: write actions only
+      x-obtained-from: >-
+        Account Settings after signing in to catalogue.data.gov.bc.ca; requires
+        editor/publisher rights in a B.C. government organization.
+      x-note: Public read actions require no credential at all.
+  - target: $.paths['/action/package_search'].get
+    description: Document the Solr parameters DataBC's own how-to uses but the contract omits.
+    update:
+      x-solr-query: true
+      x-additional-parameters:
+        - name: fq
+          in: query
+          description: Solr filter query.
+        - name: rows
+          in: query
+          description: Page size.
+        - name: start
+          in: query
+          description: Rows to skip.
+        - name: facet
+          in: query
+          description: Enable faceting.
+        - name: facet.field
+          in: query
+          description: JSON array of fields to facet on.
+      x-example-queries:
+        - q=res_format:wms
+        - q=res_extras_bcdc_type:geographic
+        - q=res_extras_resource_storage_location:bc%20geographic%20warehouse
+        - q=license_id:2
+      x-response-fields:
+        count: Total matching datasets (3,356 catalogue-wide with q=*:*).
+        results: The page of package objects, each with its full resources[] array.
+  - target: $.paths['/action/package_show'].get
+    description: Note the metadata-to-map-service join key carried on each resource.
+    update:
+      x-crosswalk:
+        field: resources[].object_name
+        points_at: >-
+          The matching layer name in the DataBC WMS/WFS capabilities at
+          openmaps.gov.bc.ca/geo/pub/ows.
+        artifacts:
+          - openapi/british-columbia-data-catalogue-databc-pub-wms-capabilities.xml
+          - openapi/british-columbia-data-catalogue-databc-pub-wfs-capabilities.xml
+  - target: $.paths['/action/package_revision_list']
+    description: >-
+      Flag as a stale-contract risk. Revision and HTML-activity actions were removed or
+      reworked in CKAN after the 2.9 line this catalogue runs. DataBC publishes no
+      deprecation notice, so this is our observation, not a provider signal.
+    update:
+      x-stale-contract-risk: true
+  - target: $.paths['/action/related_list']
+    description: Same stale-contract risk as package_revision_list.
+    update:
+      x-stale-contract-risk: true

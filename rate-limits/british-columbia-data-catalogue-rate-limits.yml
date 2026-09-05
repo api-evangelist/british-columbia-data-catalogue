@@ -1,94 +1,57 @@
 specification: API Commons Rate Limits
 specificationVersion: '0.1'
-schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
 provider: British Columbia Data Catalogue
 providerId: british-columbia-data-catalogue
+generated: '2026-09-04'
+method: probed
+source: >-
+  Live unauthenticated requests to https://catalogue.data.gov.bc.ca/api/3/action/ with
+  response headers captured, plus a documentation search of
+  https://bcgov.github.io/data-publication/.
 created: '2026-05-04'
-# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
-# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-04'
-tags:
-  - Open Data
-  - Government
-  - Canadian Government
-  - British Columbia
-  - Provincial Data
-  - CKAN
-  - Geospatial
-  - Rate Limiting
-  - Quotas
-  - Throttling
-description: Machine-readable rate limit definitions for the British Columbia Data Catalogue API surface.
-  Captures per-tier quotas, burst behavior, response signaling, and recovery semantics. Defaults are scaffold
-  values to be replaced with published provider limits.
+modified: '2026-09-04'
+# REPLACES a 2026-05-04 bulk-sweep scaffold that invented free/professional/enterprise
+# tiers (10/100/1000 rpm), monthly quotas and X-RateLimit-* headers this API does not
+# return. See roadmap#35.
+limit_count: 0
+documented: false
+headers_returned: []
 headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
-  retryAfter: Retry-After
-  policy: RateLimit-Policy
+  limit: null
+  remaining: null
+  reset: null
+  retryAfter: null
+  policy: null
 responseCodes:
-  throttled: 429
-  quotaExceeded: 429
-  serviceUnavailable: 503
-limits:
-  - tier: free
-    name: Free Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 10
-    burst: 20
-    timeFrame: minute
-    applies:
-      - BC Data Catalogue CKAN API
-  - tier: free
-    name: Free Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 1000
-    timeFrame: month
-    applies:
-      - BC Data Catalogue CKAN API
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 100
-    burst: 200
-    timeFrame: minute
-    applies:
-      - BC Data Catalogue CKAN API
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
-    applies:
-      - BC Data Catalogue CKAN API
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
-    scope: contract
-    metric: requests_per_minute
-    limit: 1000
-    burst: 5000
-    timeFrame: minute
-    applies:
-      - BC Data Catalogue CKAN API
-policies:
-  - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
-  - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
+  throttled: null
+limits: []
+detail: >-
+  DataBC publishes no rate limits, quotas or throttling policy for the BC Data Catalogue
+  API, and the API returns no rate-limit signalling of any kind. A HEAD against
+  /api/3/action/package_list?limit=1 returned only content-type, content-length,
+  cache-control, server (Werkzeug/1.0.0 Python/3.8.10) and the gateway's
+  x-kong-upstream-latency / x-kong-proxy-latency. No RateLimit-*, X-RateLimit-* or
+  Retry-After header was present, and no 429 was observed.
+observed:
+  - url: https://catalogue.data.gov.bc.ca/api/3/action/package_list?limit=1
+    method: HEAD
+    status: 200
+    headers_seen:
+      - content-type
+      - content-length
+      - cache-control
+      - server
+      - date
+      - x-kong-upstream-latency
+      - x-kong-proxy-latency
+gateway:
+  vendor: Kong
+  evidence: x-kong-upstream-latency and x-kong-proxy-latency response headers
+  note: >-
+    The surface sits behind DataBC's Kong-based API management service, so throttling may
+    exist at the gateway without being advertised. An agent has no runtime signal to back
+    off on: it would discover a limit only by being cut off. Publishing RateLimit headers
+    (RFC 9331 style) would be the single highest-value runtime addition here.
 maintainers:
   - FN: Kin Lane
     email: info@apievangelist.com

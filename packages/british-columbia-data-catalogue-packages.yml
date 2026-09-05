@@ -1,0 +1,82 @@
+generated: '2026-09-04'
+method: searched
+source: >-
+  CRAN (crandb.r-pkg.org), PyPI (pypi.org/pypi/<pkg>/json) and the bcgov GitHub
+  organization, reached from the BC Data Catalogue API documentation at
+  bcgov.github.io/data-publication.
+provider: British Columbia Data Catalogue
+providerId: british-columbia-data-catalogue
+note: >-
+  DataBC publishes no JavaScript, Java, .NET, Go, Ruby, PHP or Rust client for the BC
+  Data Catalogue. The first-party client surface is entirely R, published to CRAN from
+  the bcgov GitHub organization with the Province of British Columbia named as copyright
+  holder. Python and generic CKAN clients that call the catalogue exist but are
+  community-maintained and are recorded here as official: false.
+summary:
+  total: 4
+  official: 2
+  registries:
+    - cran
+    - pypi
+packages:
+  - name: bcdata
+    registry: cran
+    official: true
+    language: R
+    url: https://cran.r-project.org/package=bcdata
+    repository: https://github.com/bcgov/bcdata
+    docs: https://bcgov.github.io/bcdata/
+    version: 0.5.3
+    published: '2026-07-09'
+    license: Apache-2.0
+    description: >-
+      Search, query and download data and metadata from the B.C. Data Catalogue, including
+      records held in the B.C. Geographic Warehouse via the DataBC WFS.
+    evidence: https://crandb.r-pkg.org/bcdata
+    first_party_basis: >-
+      Published from the bcgov GitHub organization (Government of British Columbia) and
+      lists "Province of British Columbia [cph]" as copyright holder; its declared URLs
+      include https://catalogue.data.gov.bc.ca.
+  - name: bcmaps
+    registry: cran
+    official: true
+    language: R
+    url: https://cran.r-project.org/package=bcmaps
+    repository: https://github.com/bcgov/bcmaps
+    docs: https://bcgov.github.io/bcmaps/
+    version: 2.3.0
+    published: '2026-02-20'
+    description: >-
+      Map layers and spatial utilities for British Columbia, drawing boundary layers from
+      the B.C. Data Catalogue and the DataBC WFS.
+    evidence: https://crandb.r-pkg.org/bcmaps
+    first_party_basis: Published from the bcgov (Government of British Columbia) GitHub organization.
+  - name: bcdata
+    registry: pypi
+    official: false
+    language: Python
+    url: https://pypi.org/project/bcdata/
+    repository: https://github.com/smnorris/bcdata
+    version: 0.17.1
+    published: '2026-08-21'
+    description: Download open data from the B.C. Data Catalogue and DataBC WFS.
+    evidence: https://pypi.org/pypi/bcdata/json
+    note: >-
+      Community package maintained under the smnorris GitHub account, not bcgov. Shares a
+      name with the official CRAN package but is a separate project.
+  - name: ckanapi
+    registry: pypi
+    official: false
+    language: Python
+    url: https://pypi.org/project/ckanapi/
+    version: '4.11'
+    published: null
+    description: >-
+      Generic CKAN Action API client. Named in the BC Data Catalogue's own API
+      documentation as the Python client used in its worked examples.
+    evidence: https://pypi.org/pypi/ckanapi/json
+    docs: https://bcgov.github.io/data-publication/pages/dps_bcdc_api_w_common_calls.html
+    note: >-
+      Not a BC product — a CKAN-community client for any CKAN portal. version read from
+      the PyPI metadata endpoint; published date not recorded on that response, left null
+      rather than guessed.

@@ -1,0 +1,28 @@
+generated: '2026-09-04'
+method: generated
+source: >-
+  Grounded in operationIds present in openapi/ (packageSearch, packageShow,
+  organizationList, resourceShow) and in live probes of the CKAN Action API and the DataBC
+  OGC services. No provider-published Agent Skills or AGENTS.md was found in the bcgov
+  organization or on any catalogue host.
+provider: British Columbia Data Catalogue
+providerId: british-columbia-data-catalogue
+skills:
+  - name: find-a-bc-dataset
+    file: skills/british-columbia-data-catalogue-find-a-bc-dataset.md
+    description: >-
+      Search 3,356 B.C. government datasets by topic, publisher or distribution format and
+      resolve the download URLs.
+    operations:
+      - packageSearch
+      - packageShow
+      - organizationList
+  - name: load-a-bc-map-layer
+    file: skills/british-columbia-data-catalogue-load-a-bc-map-layer.md
+    description: >-
+      Cross from a catalogue record to the DataBC OGC WMS/WFS services via the resource's
+      object_name and pull the layer as GeoJSON or a rendered image.
+    operations:
+      - packageSearch
+      - packageShow
+      - resourceShow

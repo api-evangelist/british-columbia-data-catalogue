@@ -1,0 +1,187 @@
+generated: '2026-09-04'
+method: derived
+source: >-
+  Derived from live responses of package_show, organization_show, group_list and
+  status_show on https://catalogue.data.gov.bc.ca/api/3/action/, cross-checked against the
+  first-party OpenAPI. The BC-specific fields were read off a real record
+  (bc-wildfire-fire-perimeters-current), not from upstream CKAN documentation.
+provider: British Columbia Data Catalogue
+providerId: british-columbia-data-catalogue
+note: >-
+  The published OpenAPI declares an EMPTY components.schemas — every one of its 22
+  operations documents only "200: List of packages" with no response schema. The entity
+  graph below therefore had to be observed from live payloads. That gap is the single
+  biggest contract weakness on this surface: a client can discover the operations from the
+  spec but not the shape of anything they return.
+identifiers:
+  package: 'UUID (id) and a URL slug (name); most actions accept either as id / name_or_id'
+  organization: UUID and slug
+  group: UUID and slug
+  resource: UUID
+  tag: UUID and free-text name, with an optional vocabulary_id
+entities:
+  - name: Package
+    aka: dataset
+    action: package_show
+    count_observed: 3356
+    description: The metadata record for one B.C. government dataset, application or web service.
+    key_fields:
+      - id
+      - name
+      - title
+      - notes
+      - state
+      - type
+      - private
+      - license_id
+      - license_title
+      - license_url
+      - metadata_created
+      - metadata_modified
+      - num_resources
+      - num_tags
+    bc_specific_fields:
+      - publish_state
+      - security_class
+      - view_audience
+      - download_audience
+      - metadata_visibility
+      - retention_expiry_date
+      - resource_status
+      - record_create_date
+      - record_publish_date
+      - record_last_modified
+      - lineage_statement
+      - source_data_path
+      - purpose
+      - more_info
+      - contacts
+      - dates
+      - replacement_record
+    bc_specific_note: >-
+      These come from ckanext-bcgov / ckanext-scheming (the bcgov_schema and
+      scheming_datasets extensions status_show reports). They are NOT in stock CKAN, and
+      they are not in the published OpenAPI either — security_class, view_audience and
+      retention_expiry_date in particular carry real governance meaning and are only
+      discoverable by calling scheming_dataset_schema_show or by reading a live record.
+  - name: Organization
+    action: organization_show
+    count_observed: 244
+    description: The B.C. government ministry, agency or public-sector body that owns a dataset.
+    key_fields:
+      - id
+      - name
+      - title
+      - description
+      - image_url
+      - state
+      - approval_status
+      - is_organization
+  - name: Group
+    action: group_show
+    count_observed: 26
+    description: >-
+      A thematic collection cutting across organizations — e.g. ClimateReadyBC - Wildfire,
+      Census Profiles, and BC Government API Registry, which is itself the catalogue's
+      register of B.C. government APIs.
+    key_fields:
+      - id
+      - name
+      - title
+      - description
+  - name: Resource
+    action: resource_show
+    description: >-
+      One distributable artifact attached to a package — a file, a WMS/WFS map service, an
+      ArcGIS REST item, a KML loader, or an Oracle SDE table in the BC Geographic Warehouse.
+    key_fields:
+      - id
+      - package_id
+      - name
+      - description
+      - format
+      - url
+      - mimetype
+      - size
+      - state
+      - position
+      - created
+      - last_modified
+      - datastore_active
+    bc_specific_fields:
+      - bcdc_type
+      - object_name
+      - object_short_name
+      - object_table_comments
+      - resource_storage_location
+      - resource_access_method
+      - resource_update_cycle
+      - spatial_datatype
+      - projection_name
+      - geographic_extent
+      - iso_topic_category
+      - ofi
+      - details
+      - supplemental_info
+    bc_specific_note: >-
+      object_name is the BC Geographic Warehouse table (e.g.
+      WHSE_LAND_AND_NATURAL_RESOURCE.PROT_CURRENT_FIRE_POLYS_SP) and is the join key
+      between this catalogue and the DataBC OGC services — the same string appears as the
+      WMS/WFS layer name at openmaps.gov.bc.ca. iso_topic_category and projection_name are
+      ISO 19115 geospatial metadata carried inline on the resource.
+  - name: Tag
+    action: tag_show
+    description: A free-text or controlled-vocabulary keyword on a package.
+    key_fields:
+      - id
+      - name
+      - display_name
+      - state
+      - vocabulary_id
+  - name: User
+    action: user_list
+    description: A catalogue account.
+    excluded: true
+    exclusion_reason: >-
+      user_list answers anonymously and returns real names and account identifiers of
+      B.C. public servants. No fields are enumerated and no example is stored here, per the
+      enrichment PII guardrail.
+relationships:
+  - from: Package
+    to: Organization
+    type: belongs_to
+    via: owner_org (and the embedded organization object)
+  - from: Package
+    to: Resource
+    type: has_many
+    via: resources[]
+  - from: Package
+    to: Tag
+    type: has_many
+    via: tags[]
+  - from: Package
+    to: Group
+    type: has_many
+    via: groups[]
+  - from: Package
+    to: Package
+    type: has_many
+    via: relationships_as_subject / relationships_as_object
+    note: CKAN package relationships; present but empty on the record observed.
+  - from: Resource
+    to: Package
+    type: belongs_to
+    via: package_id
+  - from: Organization
+    to: Package
+    type: has_many
+    via: reverse of owner_org; count exposed as package_count on organization_show
+  - from: Resource
+    to: OGCLayer
+    type: has_one
+    via: object_name
+    external: true
+    note: >-
+      Not a CKAN relationship. The resource's object_name matches a layer name in
+      openapi/british-columbia-data-catalogue-databc-pub-wms-capabilities.xml, which is how
+      a client crosses from catalogue metadata to the live map service.

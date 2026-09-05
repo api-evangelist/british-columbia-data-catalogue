@@ -1,0 +1,45 @@
+generated: '2026-09-04'
+method: probed
+source: >-
+  servers[] of the first-party OpenAPI at github.com/bcgov/api-specs/bcdc/bcdc.json, each
+  entry probed live with /api/3/action/status_show.
+provider: British Columbia Data Catalogue
+providerId: british-columbia-data-catalogue
+has_sandbox: true
+kind: separate-environment
+detail: >-
+  DataBC names three environments in the contract itself rather than only in prose, which
+  is rare for an open-data portal. The test catalogue is live and open to anonymous
+  requests, so a client can rehearse against a non-production catalogue with no signup and
+  no key. There are no test keys, test cards, fixtures, triggers or time-simulation tools —
+  this is a read-mostly metadata API, and the sandbox is simply a second deployment.
+environments:
+  - name: Production
+    role: live
+    base_url: https://catalogue.data.gov.bc.ca/api/3
+    status: 200
+    checked: '2026-09-04'
+  - name: Test
+    role: sandbox
+    base_url: https://cat.data.gov.bc.ca/api/3
+    status: 200
+    checked: '2026-09-04'
+    auth: none for read
+    note: >-
+      Answers status_show anonymously. Its help URL resolves to toyger.data.gov.bc.ca,
+      confirming a distinct deployment rather than a DNS alias of production.
+  - name: Delivery
+    role: pre-sandbox
+    base_url: https://cad.data.gov.bc.ca/api/3
+    status: 0
+    checked: '2026-09-04'
+    note: Declared in servers[] but did not resolve or connect from this probe.
+caveat: >-
+  The published spec warns that requests to the delivery or test environment may misbehave
+  when the spec is loaded into third-party API console viewers — quoted from
+  info.description of bcdc.json.
+test_values:
+  cards: []
+  accounts: []
+  tokens: []
+  note: None published. Nothing invented.
