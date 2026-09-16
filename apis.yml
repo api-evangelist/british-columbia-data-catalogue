@@ -58,32 +58,6 @@ description: >-
   referenced by 884 catalogue datasets. Everything is published under the Open Government
   Licence — British Columbia and is free to use with attribution.
 apis:
-- aid: british-columbia-data-catalogue:ckan-api
-  baseURL: https://catalogue.data.gov.bc.ca/api/3
-  name: BC Data Catalogue CKAN API
-  tags:
-  - CKAN
-  - Open Data
-  - Dataset Search
-  - Metadata
-  - Government Data
-  humanURL: https://catalogue.data.gov.bc.ca/
-  properties:
-  - url: https://catalogue.data.gov.bc.ca/
-    type: Documentation
-  - type: OpenAPI
-    url: openapi/british-columbia-data-catalogue-bcdc-api-openapi.json
-  - type: Overlay
-    url: overlays/british-columbia-data-catalogue-bcdc-api-overlay.yaml
-  - type: APIReference
-    url: https://bcgov.github.io/data-publication/pages/dps_bcdc_api_w_common_calls.html
-  description: >-
-    The BC Data Catalogue exposes a CKAN v3 REST API at https://catalogue.data.gov.bc.ca/api/3/action/
-    providing programmatic access to BC government open datasets. Key endpoints include package_list (list
-    all datasets), package_search (search datasets by query), package_show (retrieve dataset metadata
-    and resources), organization_list (list BC government organizations), and resource_show (retrieve
-    specific data resource information). Returns JSON with success status and result payloads. No authentication
-    required for read access to public datasets.
 - aid: british-columbia-data-catalogue:british-columbia-data-catalogue-datasets-api
   baseURL: https://catalogue.data.gov.bc.ca/api/3
   name: British Columbia Data Catalogue Datasets API
@@ -153,16 +127,15 @@ apis:
   baseURL: https://openmaps.gov.bc.ca/geo/pub/ows
   name: DataBC Public OGC Web Services (WMS/WFS)
   description: >-
-    DataBC's public OGC endpoint serves the spatial half of the BC Data Catalogue: 895
-    queryable WMS 1.3.0 layers and 896 WFS 2.0.0 feature types drawn from the BC
-    Geographic Warehouse. 884 catalogue datasets carry a resource pointing at this host,
-    and a resource's object_name (for example
-    WHSE_LAND_AND_NATURAL_RESOURCE.PROT_CURRENT_FIRE_POLYS_SP) is the layer name here, so
-    it is the join between catalogue metadata and live geometry. GetMap and GetFeature
-    return PNG, GeoJSON, TopoJSON, UTFGrid, KML, PDF or Atom. No key and no account. The
-    contract is the GetCapabilities document itself, saved verbatim in this repo; the
-    service names DataBC as its ows:ServiceProvider (datamaps@gov.bc.ca).
-  humanURL: https://www2.gov.bc.ca/gov/content/data/geographic-data-services/web-based-mapping/map-services
+    DataBC's public OGC endpoint serves the spatial half of the BC Data Catalogue: 895 queryable WMS 1.3.0
+    layers and 896 WFS 2.0.0 feature types drawn from the BC Geographic Warehouse. 884 catalogue datasets
+    carry a resource pointing at this host, and a resource's object_name (for example WHSE_LAND_AND_NATURAL_RESOURCE.PROT_CURRENT_FIRE_POLYS_SP)
+    is the layer name here, so it is the join between catalogue metadata and live geometry. GetMap and
+    GetFeature return PNG, GeoJSON, TopoJSON, UTFGrid, KML, PDF or Atom. No key and no account. The contract
+    is the GetCapabilities document itself, saved verbatim in this repo; the service names DataBC as its
+    ows:ServiceProvider (datamaps@gov.bc.ca).
+  humanURL: >-
+    https://www2.gov.bc.ca/gov/content/data/geographic-data-services/web-based-mapping/map-services
   tags:
   - Geospatial
   - OGC
@@ -175,13 +148,27 @@ apis:
   - type: GetCapabilities
     url: openapi/british-columbia-data-catalogue-databc-pub-wfs-capabilities.xml
   - type: WMS
-    url: >-
-      https://openmaps.gov.bc.ca/geo/pub/ows?service=WMS&request=GetCapabilities&version=1.3.0
+    url: https://openmaps.gov.bc.ca/geo/pub/ows?service=WMS&request=GetCapabilities&version=1.3.0
   - type: WFS
-    url: >-
-      https://openmaps.gov.bc.ca/geo/pub/ows?service=WFS&request=GetCapabilities&version=2.0.0
+    url: https://openmaps.gov.bc.ca/geo/pub/ows?service=WFS&request=GetCapabilities&version=2.0.0
   - type: Documentation
-    url: https://www2.gov.bc.ca/gov/content/data/geographic-data-services/web-based-mapping/map-services
+    url: >-
+      https://www2.gov.bc.ca/gov/content/data/geographic-data-services/web-based-mapping/map-services
+- aid: british-columbia-data-catalogue:british-columbia-data-catalogue-action-api
+  name: British Columbia Data Catalogue Action API
+  description: >-
+    CKAN's Action API is a powerful, RPC-style API that exposes all of CKAN's core features to API clients.
+  humanURL: https://catalogue.data.gov.bc.ca/
+  baseURL: https://catalogue.data.gov.bc.ca/api/3
+  tags:
+  - action
+  properties:
+  - type: OpenAPI
+    url: openapi/british-columbia-data-catalogue-action-api-openapi.yml
+  - type: Documentation
+    url: https://catalogue.data.gov.bc.ca/
+  - type: APIReference
+    url: https://bcgov.github.io/data-publication/pages/dps_bcdc_api_w_common_calls.html
 common:
   - type: Authentication
     url: authentication/british-columbia-data-catalogue-authentication.yml
