@@ -1,12 +1,8 @@
 {
   "provider": "british-columbia-data-catalogue",
   "sources": [
-    "british-columbia-data-catalogue-datasets-api-openapi.yml",
-    "british-columbia-data-catalogue-groups-api-openapi.yml",
-    "british-columbia-data-catalogue-organizations-api-openapi.yml",
-    "british-columbia-data-catalogue-resources-api-openapi.yml",
-    "british-columbia-data-catalogue-site-api-openapi.yml",
-    "british-columbia-data-catalogue-tags-api-openapi.yml"
+    "_original/british-columbia-data-catalogue-openapi.yml",
+    "british-columbia-data-catalogue-action-api-openapi.yml"
   ],
   "outputs": [
     "british-columbia-data-catalogue-datasets-api-openapi.yml",
@@ -14,19 +10,31 @@
     "british-columbia-data-catalogue-organizations-api-openapi.yml",
     "british-columbia-data-catalogue-resources-api-openapi.yml",
     "british-columbia-data-catalogue-site-api-openapi.yml",
-    "british-columbia-data-catalogue-tags-api-openapi.yml"
+    "british-columbia-data-catalogue-tags-api-openapi.yml",
+    "british-columbia-data-catalogue-action-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
-  "warnings": [],
+  "warnings": [
+    "british-columbia-data-catalogue-action-api-openapi.yml: previously refined output kept for 13 operation(s) no archived document covers (e.g. /action/organization_activity_list get, /action/organization_activity_list_html get, /action/organization_autocomplete get); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth."
+  ],
   "notes": [
-    "british-columbia-data-catalogue-datasets-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "british-columbia-data-catalogue-groups-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "british-columbia-data-catalogue-organizations-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "british-columbia-data-catalogue-resources-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "british-columbia-data-catalogue-site-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "british-columbia-data-catalogue-tags-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "british-columbia-data-catalogue-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "british-columbia-data-catalogue-openapi.yml: declared missing tag: Datasets",
+    "british-columbia-data-catalogue-openapi.yml: declared missing tag: Groups",
+    "british-columbia-data-catalogue-openapi.yml: declared missing tag: Organizations",
+    "british-columbia-data-catalogue-openapi.yml: declared missing tag: Resources",
+    "british-columbia-data-catalogue-openapi.yml: declared missing tag: Site",
+    "british-columbia-data-catalogue-openapi.yml: declared missing tag: Tags",
     "apis.yml register: already-registered"
   ],
-  "skipped": []
+  "skipped": [
+    "british-columbia-data-catalogue-datasets-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "british-columbia-data-catalogue-groups-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "british-columbia-data-catalogue-organizations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "british-columbia-data-catalogue-resources-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "british-columbia-data-catalogue-site-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "british-columbia-data-catalogue-tags-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

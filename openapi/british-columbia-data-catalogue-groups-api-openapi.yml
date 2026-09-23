@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: BC Data Catalogue CKAN Datasets Groups API
+  title: BC Data Catalogue CKAN Groups API
   description: The British Columbia Data Catalogue exposes a CKAN 2.9 API at /api/3/action/ for searching and retrieving open dataset metadata, organizations, groups, tags, and resources without authentication.
   version: '3'
   contact:

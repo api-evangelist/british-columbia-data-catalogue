@@ -1,0 +1,384 @@
+openapi: 3.2.0
+info:
+  title: BC Data Catalogue Action API
+  description: 'This API provides live access to the BC Data Catalogue. Further documentation on the API is available from http://docs.ckan.org/en/latest/ Confirm the version of the API available from the catalogue by requesting https://catalogue.data.gov.bc.ca/api/3/action/status_show.
+
+
+    Please note that you may experience issues when submitting requests to the delivery or test environment if using this OpenAPI specification in other API console viewers.'
+  termsOfService: https://www2.gov.bc.ca/gov/content?id=D1EE0A405E584363B205CD4353E02C88
+  contact:
+    name: Data BC
+    url: http://data.gov.bc.ca/
+    email: data@gov.bc.ca
+  license:
+    name: Open Government License - British Columbia
+    url: https://www2.gov.bc.ca/gov/content?id=A519A56BC2BF44E4A008B33FCF527F61
+  version: 3.0.1
+servers:
+- url: https://catalogue.data.gov.bc.ca/api/3
+  description: Production
+- url: https://cat.data.gov.bc.ca/api/3
+  description: Test
+- url: https://cad.data.gov.bc.ca/api/3
+  description: Delivery
+security:
+- githubAccessCode:
+  - user
+  - user:email
+  - user:follow
+  - public_repo
+  - repo
+  - repo_deployment
+  - repo:status
+  - delete_repo
+  - notifications
+  - gist
+  - read:repo_hook
+  - write:repo_hook
+  - admin:repo_hook
+  - read:org
+  - write:org
+  - admin:org
+  - read:public_key
+  - write:public_key
+  - admin:public_key
+- internalApiKey: []
+tags:
+- name: Action
+  description: CKAN's Action API is a powerful, RPC-style API that exposes all of CKAN's core features to API clients.
+  externalDocs:
+    description: Find out more
+    url: http://docs.ckan.org/en/ckan-2.5.3/api/index.html
+paths:
+  /action/package_activity_list:
+    get:
+      summary: Get the activity stream of a package (dataset)
+      description: Returns a package's activity stream
+      parameters:
+      - name: id
+        in: query
+        description: The id or name of the package
+        schema:
+          type: string
+          default: grizzly-bear-population-units
+      - name: offset
+        in: query
+        description: Where to start getting activity items from
+        schema:
+          type: integer
+          default: 0
+      - name: limit
+        in: query
+        description: The maximum number of activities to return
+        schema:
+          type: integer
+          default: 31
+      tags:
+      - Action
+      responses:
+        '200':
+          description: List of activities
+      operationId: getActionPackageActivityList
+      x-operation-id-source: derived
+  /action/package_activity_list_html:
+    get:
+      summary: Get the activity stream of a package (dataset), HTML format
+      description: The activity stream is rendered as a snippet of HTML meant to be included in an HTML pag, i.e it doesn't have any header or footer.
+      parameters:
+      - name: id
+        in: query
+        description: The id or name of the package
+        schema:
+          type: string
+          default: grizzly-bear-population-units
+      - name: offset
+        in: query
+        description: Where to start getting activity items from
+        schema:
+          type: integer
+          default: 0
+      - name: limit
+        in: query
+        description: The maximum number of activities to return
+        schema:
+          type: integer
+          default: 31
+      tags:
+      - Action
+      responses:
+        '200':
+          description: List of activities rendered as HTML snippet
+      operationId: getActionPackageActivityListHtml
+      x-operation-id-source: derived
+  /action/package_autocomplete:
+    get:
+      summary: Find packages (datasets) matching a query
+      description: Return a list of datasets that match a string
+      parameters:
+      - name: q
+        in: query
+        description: The string to query
+        schema:
+          type: string
+          default: '"Okanagan Lake"'
+      - name: limit
+        in: query
+        description: The maximum number of resource formats to return
+        schema:
+          type: integer
+          default: 10
+      tags:
+      - Action
+      responses:
+        '200':
+          description: List of datasets that match a string
+      operationId: getActionPackageAutocomplete
+      x-operation-id-source: derived
+  /action/package_relationships_list:
+    get:
+      summary: Get package (dataset) relationships
+      description: Return a dataset's relationships
+      parameters:
+      - name: id
+        in: query
+        description: The id or name of the first package
+        schema:
+          type: string
+          default: grizzly-bear-population-units
+      - name: id2
+        in: query
+        description: The id or name of the second package
+        schema:
+          type: string
+          default: important-fossil-areas
+      - name: rel
+        in: query
+        description: relationship as string
+        schema:
+          type: string
+      tags:
+      - Action
+      responses:
+        '200':
+          description: List of dataset relationships
+      operationId: getActionPackageRelationshipsList
+      x-operation-id-source: derived
+  /action/package_revision_list:
+    get:
+      summary: Get list of revisions for a package (dataset)
+      description: Return a dataset's revision as a list of dictionaries
+      parameters:
+      - name: id
+        in: query
+        description: The id or name of the dataset
+        schema:
+          type: string
+          default: grizzly-bear-population-units
+      tags:
+      - Action
+      responses:
+        '200':
+          description: List of dataset revisions
+      operationId: getActionPackageRevisionList
+      x-operation-id-source: derived
+  /action/organization_activity_list:
+    get:
+      summary: Get the activity stream of an organization
+      description: Return an organization's activity stream
+      parameters:
+      - name: id
+        in: query
+        description: The id or name of the organization
+        schema:
+          type: string
+          default: ministry-of-agriculture
+      tags:
+      - Action
+      responses:
+        '200':
+          description: List of an organization's activities
+      operationId: getActionOrganizationActivityList
+      x-operation-id-source: derived
+  /action/organization_activity_list_html:
+    get:
+      summary: Get the activity stream of an organization, HTML format
+      description: Return an organization's activity stream as HTML
+      parameters:
+      - name: id
+        in: query
+        description: The id or name of the organization
+        schema:
+          type: string
+          default: ministry-of-agriculture
+      tags:
+      - Action
+      responses:
+        '200':
+          description: List of an organization's activities in HTML
+      operationId: getActionOrganizationActivityListHtml
+      x-operation-id-source: derived
+  /action/organization_follower_count:
+    get:
+      summary: Get number of followers of an organization
+      description: Return the number of followers of an organization
+      parameters:
+      - name: id
+        in: query
+        description: The id or name of the organization
+        schema:
+          type: string
+          default: ministry-of-agriculture
+      tags:
+      - Action
+      responses:
+        '200':
+          description: Count of organization followers
+      operationId: getActionOrganizationFollowerCount
+      x-operation-id-source: derived
+  /action/organization_follower_list:
+    get:
+      summary: Get users following an organization
+      description: Return a list of users that are following a given organization
+      parameters:
+      - name: id
+        in: query
+        description: The id or name of the organization
+        schema:
+          type: string
+          default: ministry-of-agriculture
+      tags:
+      - Action
+      responses:
+        '200':
+          description: List of organization followers
+      operationId: getActionOrganizationFollowerList
+      x-operation-id-source: derived
+  /action/organization_list_for_user:
+    get:
+      summary: Get organizations that a user has a given permission for
+      description: Return the organizations that the user has a given permission for
+      parameters:
+      - name: permission
+        in: query
+        description: The permission the user has against the returned organization
+        schema:
+          type: string
+          default: '"edit_group"'
+      tags:
+      - Action
+      responses:
+        '200':
+          description: List of organizations for given permission
+      operationId: getActionOrganizationListForUser
+      x-operation-id-source: derived
+  /action/organization_revision_list:
+    get:
+      summary: Get organization revisions
+      description: Return an organization's revisions
+      parameters:
+      - name: id
+        in: query
+        description: The name or id of the organization
+        schema:
+          type: string
+          default: ministry-of-agriculture
+      tags:
+      - Action
+      responses:
+        '200':
+          description: List of an organization's revisions
+      operationId: getActionOrganizationRevisionList
+      x-operation-id-source: derived
+  /action/organization_autocomplete:
+    get:
+      summary: Get names of organizations that match a query string
+      description: Return a list of organization names that contain a string
+      parameters:
+      - name: q
+        in: query
+        description: The string to search for
+        schema:
+          type: string
+          default: ministry
+      - name: limit
+        in: query
+        description: The maximum number of organizations to return (optional)
+        schema:
+          type: integer
+          default: 20
+      tags:
+      - Action
+      responses:
+        '200':
+          description: List of organizations
+      operationId: getActionOrganizationAutocomplete
+      x-operation-id-source: derived
+  /action/related_list:
+    get:
+      summary: Gets items related to a package (dataset)
+      description: Returns a dataset's related items.
+      parameters:
+      - name: id
+        in: query
+        description: id or name of the dataset (optional)
+        schema:
+          type: string
+      - name: dataset
+        in: query
+        description: Dataset dictionary of the dataset (optional)
+        schema:
+          type: string
+      - name: type_filter
+        in: query
+        description: The type of related item to show (optional)
+        schema:
+          type: string
+      - name: sort
+        in: query
+        description: The order to sort the related items in
+        schema:
+          type: string
+      - name: featured
+        in: query
+        description: whether or not to restrict the results to only featured items
+        schema:
+          type: string
+      tags:
+      - Action
+      responses:
+        '200':
+          description: Search for related items
+      operationId: getActionRelatedList
+      x-operation-id-source: derived
+components:
+  securitySchemes:
+    githubAccessCode:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://github.com/login/oauth/authorize
+          tokenUrl: https://github.com/login/oauth/access_token
+          scopes:
+            user: Grants read/write access to profile info only. Note that this scope includes user:email and user:follow.
+            user:email: Grants read access to a user's email addresses.
+            user:follow: Grants access to follow or unfollow other users.
+            public_repo: Grants read/write access to code, commit statuses, and deployment statuses for public repositories and organizations.
+            repo: Grants read/write access to code, commit statuses, and deployment statuses for public and private repositories and organizations.
+            repo_deployment: Grants access to deployment statuses for public and private repositories. This scope is only necessary to grant other users or services access to deployment statuses, without granting access to the code.
+            repo:status: Grants read/write access to public and private repository commit statuses. This scope is only necessary to grant other users or services access to private repository commit statuses without granting access to the code.
+            delete_repo: Grants access to delete adminable repositories.
+            notifications: Grants read access to a user's notifications. repo also provides this access.
+            gist: Grants write access to gists.
+            read:repo_hook: Grants read and ping access to hooks in public or private repositories.
+            write:repo_hook: Grants read, write, and ping access to hooks in public or private repositories.
+            admin:repo_hook: Grants read, write, ping, and delete access to hooks in public or private repositories.
+            read:org: Read-only access to organization, teams, and membership.
+            write:org: Publicize and unpublicize organization membership.
+            admin:org: Fully manage organization, teams, and memberships.
+            read:public_key: List and view details for public keys.
+            write:public_key: Create, list, and view details for public keys.
+            admin:public_key: Fully manage public keys.
+    internalApiKey:
+      type: apiKey
+      in: header
+      name: ckan_api_key
