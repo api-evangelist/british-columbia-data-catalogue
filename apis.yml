@@ -17,15 +17,20 @@ tags:
 type: Index
 kind: government
 deliveryModel:
-  model: unknown
-  open_source: false
-  commercial: false
+  model: saas
+  license_evidence:
+    not_product:
+    - bcgov/api-specs
+  open_source: unknown
+  commercial: true
   callable_host: true
-  label: Delivery model not determined — needs a product licence on record
+  label: Hosted service · you call their endpoint
   confidence: low
   source:
   - openapi
-  generated: '2026-08-28'
+  - pricing
+  - repository-not-product
+  generated: '2026-09-25'
   method: derived
 accessModel:
   pricing: freemium
