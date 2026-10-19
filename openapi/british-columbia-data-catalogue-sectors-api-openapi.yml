@@ -1,0 +1,144 @@
+openapi: 3.2.0
+info:
+  version: '1.0'
+  title: BC Gov News API Service 1.0 Sectors API
+  description: News API
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: https://news.api.gov.bc.ca/
+tags:
+- name: Sectors
+paths:
+  /api/Sectors:
+    get:
+      tags:
+      - Sectors
+      summary: Get all Sectors
+      operationId: Sectors_GetAll
+      parameters:
+      - name: api-version
+        in: query
+        description: The requested API version
+        required: true
+        schema:
+          type: string
+          default: '1.0'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Sector'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Sector'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Sector'
+  /api/Sectors/{key}:
+    get:
+      tags:
+      - Sectors
+      summary: Get the sector associated with the key
+      operationId: Sectors_GetOne
+      parameters:
+      - name: key
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: string
+      - name: api-version
+        in: query
+        description: The requested API version
+        required: true
+        schema:
+          type: string
+          default: '1.0'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Sector'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sector'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Sector'
+components:
+  schemas:
+    DataIndex:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/DataModel'
+      properties:
+        kind:
+          type: string
+        name:
+          type: string
+        topPostKey:
+          type: string
+        featurePostKey:
+          type: string
+    Category:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/DataIndex'
+      properties:
+        twitterFeedUsername:
+          type: string
+        flickrUri:
+          type: string
+        youtubeUri:
+          type: string
+        audioUri:
+          type: string
+        isActive:
+          type: boolean
+        name:
+          type: string
+        topPostKey:
+          type: string
+        featurePostKey:
+          type: string
+    Sector:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Category'
+      properties:
+        twitterFeedUsername:
+          type: string
+        flickrUri:
+          type: string
+        youtubeUri:
+          type: string
+        audioUri:
+          type: string
+        isActive:
+          type: boolean
+        name:
+          type: string
+        topPostKey:
+          type: string
+        featurePostKey:
+          type: string
+    DataModel:
+      type: object
+      properties:
+        key:
+          type: string
+        timestamp:
+          format: date-time
+          type: string

@@ -1,0 +1,89 @@
+openapi: 3.2.0
+info:
+  version: '1.0'
+  title: BC Gov News API Service 1.0 Facebook Posts API
+  description: News API
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: https://news.api.gov.bc.ca/
+tags:
+- name: FacebookPosts
+paths:
+  /api/FacebookPosts/ByUri:
+    get:
+      tags:
+      - FacebookPosts
+      summary: Get a Facebook post based on a Uri
+      operationId: FacebookPosts_GetByUri
+      parameters:
+      - name: uri
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: string
+          default: ''
+      - name: api-version
+        in: query
+        description: The requested API version
+        required: true
+        schema:
+          type: string
+          default: '1.0'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/FacebookPost'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FacebookPost'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/FacebookPost'
+components:
+  schemas:
+    FacebookPost:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/DataModel'
+      properties:
+        poster:
+          type: string
+        posterLogo:
+          type: string
+        posterSubtitle:
+          type: string
+        posterLikes:
+          format: int32
+          type: integer
+        content:
+          type: string
+        postLikes:
+          format: int32
+          type: integer
+        postComments:
+          format: int32
+          type: integer
+        postShares:
+          format: int32
+          type: integer
+        facebookObjectId:
+          format: int32
+          type: integer
+        type:
+          type: string
+        pictureUri:
+          type: string
+    DataModel:
+      type: object
+      properties:
+        key:
+          type: string
+        timestamp:
+          format: date-time
+          type: string

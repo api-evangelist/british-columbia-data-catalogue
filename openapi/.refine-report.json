@@ -5,12 +5,17 @@
     "british-columbia-data-catalogue-action-api-openapi.yml"
   ],
   "outputs": [
-    "british-columbia-data-catalogue-datasets-api-openapi.yml",
-    "british-columbia-data-catalogue-groups-api-openapi.yml",
-    "british-columbia-data-catalogue-organizations-api-openapi.yml",
-    "british-columbia-data-catalogue-resources-api-openapi.yml",
-    "british-columbia-data-catalogue-site-api-openapi.yml",
+    "british-columbia-data-catalogue-facebookposts-api-openapi.yml",
+    "british-columbia-data-catalogue-home-api-openapi.yml",
+    "british-columbia-data-catalogue-ministries-api-openapi.yml",
+    "british-columbia-data-catalogue-newsletters-api-openapi.yml",
+    "british-columbia-data-catalogue-posts-api-openapi.yml",
+    "british-columbia-data-catalogue-resourcelinks-api-openapi.yml",
+    "british-columbia-data-catalogue-sectors-api-openapi.yml",
+    "british-columbia-data-catalogue-services-api-openapi.yml",
+    "british-columbia-data-catalogue-slides-api-openapi.yml",
     "british-columbia-data-catalogue-tags-api-openapi.yml",
+    "british-columbia-data-catalogue-themes-api-openapi.yml",
     "british-columbia-data-catalogue-action-api-openapi.yml"
   ],
   "archived": [],
@@ -20,21 +25,19 @@
   ],
   "notes": [
     "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
-    "british-columbia-data-catalogue-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "british-columbia-data-catalogue-openapi.yml: declared missing tag: Datasets",
-    "british-columbia-data-catalogue-openapi.yml: declared missing tag: Groups",
-    "british-columbia-data-catalogue-openapi.yml: declared missing tag: Organizations",
-    "british-columbia-data-catalogue-openapi.yml: declared missing tag: Resources",
-    "british-columbia-data-catalogue-openapi.yml: declared missing tag: Site",
+    "british-columbia-data-catalogue-openapi.yml: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "british-columbia-data-catalogue-openapi.yml: declared missing tag: FacebookPosts",
+    "british-columbia-data-catalogue-openapi.yml: declared missing tag: Home",
+    "british-columbia-data-catalogue-openapi.yml: declared missing tag: Ministries",
+    "british-columbia-data-catalogue-openapi.yml: declared missing tag: Newsletters",
+    "british-columbia-data-catalogue-openapi.yml: declared missing tag: Posts",
+    "british-columbia-data-catalogue-openapi.yml: declared missing tag: ResourceLinks",
+    "british-columbia-data-catalogue-openapi.yml: declared missing tag: Sectors",
+    "british-columbia-data-catalogue-openapi.yml: declared missing tag: Services",
+    "british-columbia-data-catalogue-openapi.yml: declared missing tag: Slides",
     "british-columbia-data-catalogue-openapi.yml: declared missing tag: Tags",
-    "apis.yml register: already-registered"
+    "british-columbia-data-catalogue-openapi.yml: declared missing tag: Themes",
+    "apis.yml register: written (+10 apis, 13 total)"
   ],
-  "skipped": [
-    "british-columbia-data-catalogue-datasets-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "british-columbia-data-catalogue-groups-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "british-columbia-data-catalogue-organizations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "british-columbia-data-catalogue-resources-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "british-columbia-data-catalogue-site-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "british-columbia-data-catalogue-tags-api-openapi.yml: previously refined output, superseded by openapi/_original/"
-  ]
+  "skipped": []
 }

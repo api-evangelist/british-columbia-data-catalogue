@@ -1,0 +1,115 @@
+openapi: 3.2.0
+info:
+  version: '1.0'
+  title: BC Gov News API Service 1.0 Slides API
+  description: News API
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: https://news.api.gov.bc.ca/
+tags:
+- name: Slides
+paths:
+  /api/Slides/{id}:
+    get:
+      tags:
+      - Slides
+      summary: Get the slide associated to the id
+      operationId: Slides_GetOne
+      parameters:
+      - name: id
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: string
+      - name: api-version
+        in: query
+        description: The requested API version
+        required: true
+        schema:
+          type: string
+          default: '1.0'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Slide'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Slide'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Slide'
+  /api/Slides:
+    get:
+      tags:
+      - Slides
+      summary: Get all Slides
+      operationId: Slides_GetAll
+      parameters:
+      - name: api-version
+        in: query
+        description: The requested API version
+        required: true
+        schema:
+          type: string
+          default: '1.0'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Slide'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Slide'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Slide'
+components:
+  schemas:
+    DataModel:
+      type: object
+      properties:
+        key:
+          type: string
+        timestamp:
+          format: date-time
+          type: string
+    Slide:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/DataModel'
+      properties:
+        slideId:
+          format: uuid
+          type: string
+        headline:
+          type: string
+        summary:
+          type: string
+        actionLabel:
+          type: string
+        actionUri:
+          type: string
+        image:
+          format: byte
+          type: string
+        facebookPostUri:
+          type: string
+        justify:
+          type: string
+        imageType:
+          type: string
+          readOnly: true

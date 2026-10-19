@@ -1,0 +1,12 @@
+{
+ "url": "https://raw.githubusercontent.com/bcgov/api-specs/master/news/news-oas3.yaml",
+ "final": "https://raw.githubusercontent.com/bcgov/api-specs/master/news/news-oas3.yaml",
+ "status": 200,
+ "content_type": "text/plain; charset=utf-8",
+ "bytes": 36796,
+ "sha256": "493955a0a24ccac958ef18370a593f63e4b4a8334fd8bafef45b4f94ff70f848",
+ "fetched_at": "2026-10-19",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "byte-identical",
+ "note": "re-archived: the provider's current document replaced a stale archive (roadmap#793); the old files are in openapi/_superseded/2026-10-19-stale"
+}

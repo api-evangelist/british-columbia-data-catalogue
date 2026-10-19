@@ -1,0 +1,403 @@
+openapi: 3.2.0
+info:
+  version: '1.0'
+  title: BC Gov News API Service 1.0 Posts API
+  description: News API
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: https://news.api.gov.bc.ca/
+tags:
+- name: Posts
+paths:
+  /api/Posts/{key}:
+    get:
+      tags:
+      - Posts
+      summary: Get the post associated with the key
+      operationId: Posts_GetOne
+      parameters:
+      - name: key
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: string
+      - name: api-version
+        in: query
+        description: The requested API version
+        required: true
+        schema:
+          type: string
+          default: '1.0'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Post'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+  /api/Posts:
+    get:
+      tags:
+      - Posts
+      summary: Get the posts associated with the keys in the list passed in
+      operationId: Posts_Get
+      parameters:
+      - name: postKeys
+        in: query
+        description: ''
+        required: false
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+          default: ''
+      - name: api-version
+        in: query
+        description: The requested API version
+        required: true
+        schema:
+          type: string
+          default: '1.0'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Post'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Post'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Post'
+  /api/Posts/Latest/{indexKind}/{indexKey}:
+    get:
+      tags:
+      - Posts
+      summary: Get the latest posts of postKind for the specified index (default or category)
+      operationId: Posts_GetLatest
+      parameters:
+      - name: indexKind
+        in: path
+        description: home or one of categories
+        required: true
+        schema:
+          type: string
+      - name: indexKey
+        in: path
+        description: default or one key of the categories (ministries, sectors, services, tags, themes)
+        required: true
+        schema:
+          type: string
+      - name: postKind
+        in: query
+        description: 'One of: releases, stories, factsheets, updates or default (releases+stories except top/feature)'
+        required: false
+        schema:
+          type: string
+          default: ''
+      - name: count
+        in: query
+        description: number of posts to return
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: ''
+      - name: skip
+        in: query
+        description: number of posts to skip
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: ''
+      - name: api-version
+        in: query
+        description: The requested API version
+        required: true
+        schema:
+          type: string
+          default: '1.0'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Post'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Post'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Post'
+  /api/Posts/Keys/{indexKind}/{indexKey}:
+    get:
+      tags:
+      - Posts
+      summary: Get all keys for the specified index (newsroom or category)
+      operationId: Posts_GetAllKeys
+      parameters:
+      - name: indexKind
+        in: path
+        description: home or one of categories
+        required: true
+        schema:
+          type: string
+      - name: indexKey
+        in: path
+        description: default or one key of the categories (ministries, sectors, services, tags, themes)
+        required: true
+        schema:
+          type: string
+      - name: postKind
+        in: query
+        description: 'One of: releases, stories, factsheets, updates or default (releases+stories+factsheets)'
+        required: false
+        schema:
+          type: string
+          default: ''
+      - name: count
+        in: query
+        description: number of posts to return
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: ''
+      - name: skip
+        in: query
+        description: number of posts to skip
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: ''
+      - name: api-version
+        in: query
+        description: The requested API version
+        required: true
+        schema:
+          type: string
+          default: '1.0'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/KeyValuePair_2'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/KeyValuePair_2'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/KeyValuePair_2'
+  /api/Posts/Keys/{reference}:
+    get:
+      tags:
+      - Posts
+      summary: Get the post key associated with the reference
+      operationId: Posts_GetKeyFromReference
+      parameters:
+      - name: reference
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: string
+      - name: api-version
+        in: query
+        description: The requested API version
+        required: true
+        schema:
+          type: string
+          default: '1.0'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/KeyValuePair_2'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KeyValuePair_2'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/KeyValuePair_2'
+  /api/Posts/LatestMediaUri/{mediaType}:
+    get:
+      tags:
+      - Posts
+      summary: Gets the latest Social Media post for the social media type passed in
+      operationId: Posts_GetLatestMediaUri
+      parameters:
+      - name: mediaType
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: string
+      - name: api-version
+        in: query
+        description: The requested API version
+        required: true
+        schema:
+          type: string
+          default: '1.0'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+components:
+  schemas:
+    Post:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/DataModel'
+      properties:
+        kind:
+          type: string
+        atomId:
+          type: string
+        summary:
+          type: string
+        socialMediaSummary:
+          type: string
+        socialMediaHeadline:
+          type: string
+        keywords:
+          type: string
+        publishDate:
+          format: date-time
+          type: string
+        leadMinistryKey:
+          type: string
+        hasMediaAssets:
+          type: boolean
+        isNewsOnDemand:
+          type: boolean
+        assetUrl:
+          type: string
+        location:
+          type: string
+        documents:
+          type: array
+          items:
+            $ref: '#/components/schemas/Document'
+        reference:
+          type: string
+        redirectUri:
+          type: string
+        ministryKeys:
+          type: array
+          items:
+            type: string
+        sectorKeys:
+          type: array
+          items:
+            type: string
+        serviceKeys:
+          type: array
+          items:
+            type: string
+        facebookPictureUri:
+          type: string
+        azureAssets:
+          type: array
+          items:
+            $ref: '#/components/schemas/Asset'
+    DataModel:
+      type: object
+      properties:
+        key:
+          type: string
+        timestamp:
+          format: date-time
+          type: string
+    KeyValuePair_2:
+      type: object
+      properties:
+        key:
+          type: string
+          readOnly: true
+        value:
+          type: string
+          readOnly: true
+    Document:
+      type: object
+      properties:
+        pageTitle:
+          type: string
+        languageId:
+          format: int32
+          type: integer
+        headline:
+          type: string
+        subheadline:
+          type: string
+        detailsHtml:
+          type: string
+        byline:
+          type: string
+        contacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocumentContact'
+    Asset:
+      type: object
+      properties:
+        key:
+          type: string
+        label:
+          type: string
+        length:
+          format: int64
+          type: integer
+    DocumentContact:
+      type: object
+      properties:
+        title:
+          type: string
+        details:
+          type: string

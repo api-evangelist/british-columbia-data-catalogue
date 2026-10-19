@@ -1,0 +1,144 @@
+openapi: 3.2.0
+info:
+  version: '1.0'
+  title: BC Gov News API Service 1.0 Themes API
+  description: News API
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: https://news.api.gov.bc.ca/
+tags:
+- name: Themes
+paths:
+  /api/Themes:
+    get:
+      tags:
+      - Themes
+      summary: Get all Themes
+      operationId: Themes_GetAll
+      parameters:
+      - name: api-version
+        in: query
+        description: The requested API version
+        required: true
+        schema:
+          type: string
+          default: '1.0'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Theme'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Theme'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Theme'
+  /api/Themes/{key}:
+    get:
+      tags:
+      - Themes
+      summary: Get the Theme associated with the key
+      operationId: Themes_GetOne
+      parameters:
+      - name: key
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: string
+      - name: api-version
+        in: query
+        description: The requested API version
+        required: true
+        schema:
+          type: string
+          default: '1.0'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Theme'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Theme'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Theme'
+components:
+  schemas:
+    Theme:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Category'
+      properties:
+        twitterFeedUsername:
+          type: string
+        flickrUri:
+          type: string
+        youtubeUri:
+          type: string
+        audioUri:
+          type: string
+        isActive:
+          type: boolean
+        name:
+          type: string
+        topPostKey:
+          type: string
+        featurePostKey:
+          type: string
+    DataIndex:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/DataModel'
+      properties:
+        kind:
+          type: string
+        name:
+          type: string
+        topPostKey:
+          type: string
+        featurePostKey:
+          type: string
+    Category:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/DataIndex'
+      properties:
+        twitterFeedUsername:
+          type: string
+        flickrUri:
+          type: string
+        youtubeUri:
+          type: string
+        audioUri:
+          type: string
+        isActive:
+          type: boolean
+        name:
+          type: string
+        topPostKey:
+          type: string
+        featurePostKey:
+          type: string
+    DataModel:
+      type: object
+      properties:
+        key:
+          type: string
+        timestamp:
+          format: date-time
+          type: string

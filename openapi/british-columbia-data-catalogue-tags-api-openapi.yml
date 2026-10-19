@@ -1,80 +1,144 @@
 openapi: 3.2.0
 info:
-  title: BC Data Catalogue CKAN Tags API
-  description: The British Columbia Data Catalogue exposes a CKAN 2.9 API at /api/3/action/ for searching and retrieving open dataset metadata, organizations, groups, tags, and resources without authentication.
-  version: '3'
-  contact:
-    name: BC Data Catalogue
-    url: https://catalogue.data.gov.bc.ca/
+  version: '1.0'
+  title: BC Gov News API Service 1.0 Tags API
+  description: News API
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
 servers:
-- url: https://catalogue.data.gov.bc.ca/api/3
-  description: Production CKAN API
+- url: https://news.api.gov.bc.ca/
 tags:
 - name: Tags
 paths:
-  /action/tag_list:
+  /api/Tags:
     get:
-      summary: List tags
-      operationId: tagList
       tags:
       - Tags
+      summary: Get all Tags
+      operationId: Tags_GetAll
       parameters:
-      - name: query
+      - name: api-version
         in: query
-        schema:
-          type: string
-      - name: vocabulary_id
-        in: query
-        schema:
-          type: string
-      - name: all_fields
-        in: query
-        schema:
-          type: boolean
-      responses:
-        '200':
-          description: Tags
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CkanResponse'
-  /action/tag_show:
-    get:
-      summary: Show tag
-      operationId: tagShow
-      tags:
-      - Tags
-      parameters:
-      - name: id
-        in: query
+        description: The requested API version
         required: true
         schema:
           type: string
-      - name: vocabulary_id
-        in: query
-        schema:
-          type: string
+          default: '1.0'
       responses:
         '200':
-          description: Tag
+          description: Success
           content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Tag'
             application/json:
               schema:
-                $ref: '#/components/schemas/CkanResponse'
+                type: array
+                items:
+                  $ref: '#/components/schemas/Tag'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Tag'
+  /api/Tags/{key}:
+    get:
+      tags:
+      - Tags
+      summary: Get the Tag associated with the key
+      operationId: Tags_GetOne
+      parameters:
+      - name: key
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: string
+      - name: api-version
+        in: query
+        description: The requested API version
+        required: true
+        schema:
+          type: string
+          default: '1.0'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Tag'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tag'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Tag'
 components:
   schemas:
-    CkanResponse:
+    Tag:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Category'
+      properties:
+        twitterFeedUsername:
+          type: string
+        flickrUri:
+          type: string
+        youtubeUri:
+          type: string
+        audioUri:
+          type: string
+        isActive:
+          type: boolean
+        name:
+          type: string
+        topPostKey:
+          type: string
+        featurePostKey:
+          type: string
+    DataIndex:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/DataModel'
+      properties:
+        kind:
+          type: string
+        name:
+          type: string
+        topPostKey:
+          type: string
+        featurePostKey:
+          type: string
+    Category:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/DataIndex'
+      properties:
+        twitterFeedUsername:
+          type: string
+        flickrUri:
+          type: string
+        youtubeUri:
+          type: string
+        audioUri:
+          type: string
+        isActive:
+          type: boolean
+        name:
+          type: string
+        topPostKey:
+          type: string
+        featurePostKey:
+          type: string
+    DataModel:
       type: object
       properties:
-        help:
+        key:
           type: string
-        success:
-          type: boolean
-        result: {}
-        error:
-          type: object
-          properties:
-            message:
-              type: string
-            __type:
-              type: string
+        timestamp:
+          format: date-time
+          type: string

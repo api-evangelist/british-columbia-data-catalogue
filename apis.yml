@@ -63,61 +63,6 @@ description: >-
   referenced by 884 catalogue datasets. Everything is published under the Open Government
   Licence — British Columbia and is free to use with attribution.
 apis:
-- aid: british-columbia-data-catalogue:british-columbia-data-catalogue-datasets-api
-  baseURL: https://catalogue.data.gov.bc.ca/api/3
-  name: British Columbia Data Catalogue Datasets API
-  description: The Datasets API from British Columbia Data Catalogue — 4 operation(s) for datasets.
-  humanURL: https://catalogue.data.gov.bc.ca/
-  tags:
-  - Datasets
-  properties:
-  - type: OpenAPI
-    url: openapi/british-columbia-data-catalogue-datasets-api-openapi.yml
-- aid: british-columbia-data-catalogue:british-columbia-data-catalogue-groups-api
-  baseURL: https://catalogue.data.gov.bc.ca/api/3
-  name: British Columbia Data Catalogue Groups API
-  description: The Groups API from British Columbia Data Catalogue — 2 operation(s) for groups.
-  humanURL: https://catalogue.data.gov.bc.ca/
-  tags:
-  - Group
-  tags_raw:
-  - Groups
-  properties:
-  - type: OpenAPI
-    url: openapi/british-columbia-data-catalogue-groups-api-openapi.yml
-- aid: british-columbia-data-catalogue:british-columbia-data-catalogue-organizations-api
-  baseURL: https://catalogue.data.gov.bc.ca/api/3
-  name: British Columbia Data Catalogue Organizations API
-  description: >-
-    The Organizations API from British Columbia Data Catalogue — 2 operation(s) for organizations.
-  humanURL: https://catalogue.data.gov.bc.ca/
-  tags:
-  - Organization
-  tags_raw:
-  - Organizations
-  properties:
-  - type: OpenAPI
-    url: openapi/british-columbia-data-catalogue-organizations-api-openapi.yml
-- aid: british-columbia-data-catalogue:british-columbia-data-catalogue-resources-api
-  baseURL: https://catalogue.data.gov.bc.ca/api/3
-  name: British Columbia Data Catalogue Resources API
-  description: The Resources API from British Columbia Data Catalogue — 2 operation(s) for resources.
-  humanURL: https://catalogue.data.gov.bc.ca/
-  tags:
-  - Resources
-  properties:
-  - type: OpenAPI
-    url: openapi/british-columbia-data-catalogue-resources-api-openapi.yml
-- aid: british-columbia-data-catalogue:british-columbia-data-catalogue-site-api
-  baseURL: https://catalogue.data.gov.bc.ca/api/3
-  name: British Columbia Data Catalogue Site API
-  description: The Site API from British Columbia Data Catalogue — 1 operation(s) for site.
-  humanURL: https://catalogue.data.gov.bc.ca/
-  tags:
-  - Site
-  properties:
-  - type: OpenAPI
-    url: openapi/british-columbia-data-catalogue-site-api-openapi.yml
 - aid: british-columbia-data-catalogue:british-columbia-data-catalogue-tags-api
   baseURL: https://catalogue.data.gov.bc.ca/api/3
   name: British Columbia Data Catalogue Tags API
@@ -176,6 +121,109 @@ apis:
     url: https://catalogue.data.gov.bc.ca/
   - type: APIReference
     url: https://bcgov.github.io/data-publication/pages/dps_bcdc_api_w_common_calls.html
+- aid: british-columbia-data-catalogue:british-columbia-data-catalogue-facebookposts-api
+  name: British Columbia Data Catalogue Facebook Posts API
+  description: >-
+    The FacebookPosts API from British Columbia Data Catalogue — 1 operation(s) for facebookposts.
+  humanURL: https://catalogue.data.gov.bc.ca/
+  baseURL: https://catalogue.data.gov.bc.ca/api/3
+  tags:
+  - FacebookPosts
+  properties:
+  - type: OpenAPI
+    url: openapi/british-columbia-data-catalogue-facebookposts-api-openapi.yml
+- aid: british-columbia-data-catalogue:british-columbia-data-catalogue-home-api
+  name: British Columbia Data Catalogue Home API
+  description: The Home API from British Columbia Data Catalogue — 1 operation(s) for home.
+  humanURL: https://catalogue.data.gov.bc.ca/
+  baseURL: https://catalogue.data.gov.bc.ca/api/3
+  tags:
+  - Home
+  properties:
+  - type: OpenAPI
+    url: openapi/british-columbia-data-catalogue-home-api-openapi.yml
+- aid: british-columbia-data-catalogue:british-columbia-data-catalogue-ministries-api
+  name: British Columbia Data Catalogue Ministries API
+  description: The Ministries API from British Columbia Data Catalogue — 3 operation(s) for ministries.
+  humanURL: https://catalogue.data.gov.bc.ca/
+  baseURL: https://catalogue.data.gov.bc.ca/api/3
+  tags:
+  - Ministries
+  properties:
+  - type: OpenAPI
+    url: openapi/british-columbia-data-catalogue-ministries-api-openapi.yml
+- aid: british-columbia-data-catalogue:british-columbia-data-catalogue-newsletters-api
+  name: British Columbia Data Catalogue Newsletters API
+  description: >-
+    The Newsletters API from British Columbia Data Catalogue — 5 operation(s) for newsletters.
+  humanURL: https://catalogue.data.gov.bc.ca/
+  baseURL: https://catalogue.data.gov.bc.ca/api/3
+  tags:
+  - Newsletters
+  properties:
+  - type: OpenAPI
+    url: openapi/british-columbia-data-catalogue-newsletters-api-openapi.yml
+- aid: british-columbia-data-catalogue:british-columbia-data-catalogue-posts-api
+  name: British Columbia Data Catalogue Posts API
+  description: The Posts API from British Columbia Data Catalogue — 6 operation(s) for posts.
+  humanURL: https://catalogue.data.gov.bc.ca/
+  baseURL: https://catalogue.data.gov.bc.ca/api/3
+  tags:
+  - Posts
+  properties:
+  - type: OpenAPI
+    url: openapi/british-columbia-data-catalogue-posts-api-openapi.yml
+- aid: british-columbia-data-catalogue:british-columbia-data-catalogue-sectors-api
+  name: British Columbia Data Catalogue Sectors API
+  description: The Sectors API from British Columbia Data Catalogue — 2 operation(s) for sectors.
+  humanURL: https://catalogue.data.gov.bc.ca/
+  baseURL: https://catalogue.data.gov.bc.ca/api/3
+  tags:
+  - Sectors
+  properties:
+  - type: OpenAPI
+    url: openapi/british-columbia-data-catalogue-sectors-api-openapi.yml
+- aid: british-columbia-data-catalogue:british-columbia-data-catalogue-services-api
+  name: British Columbia Data Catalogue Services API
+  description: The Services API from British Columbia Data Catalogue — 2 operation(s) for services.
+  humanURL: https://catalogue.data.gov.bc.ca/
+  baseURL: https://catalogue.data.gov.bc.ca/api/3
+  tags:
+  - Services
+  properties:
+  - type: OpenAPI
+    url: openapi/british-columbia-data-catalogue-services-api-openapi.yml
+- aid: british-columbia-data-catalogue:british-columbia-data-catalogue-slides-api
+  name: British Columbia Data Catalogue Slides API
+  description: The Slides API from British Columbia Data Catalogue — 2 operation(s) for slides.
+  humanURL: https://catalogue.data.gov.bc.ca/
+  baseURL: https://catalogue.data.gov.bc.ca/api/3
+  tags:
+  - Slides
+  properties:
+  - type: OpenAPI
+    url: openapi/british-columbia-data-catalogue-slides-api-openapi.yml
+- aid: british-columbia-data-catalogue:british-columbia-data-catalogue-themes-api
+  name: British Columbia Data Catalogue Themes API
+  description: The Themes API from British Columbia Data Catalogue — 2 operation(s) for themes.
+  humanURL: https://catalogue.data.gov.bc.ca/
+  baseURL: https://catalogue.data.gov.bc.ca/api/3
+  tags:
+  - Themes
+  properties:
+  - type: OpenAPI
+    url: openapi/british-columbia-data-catalogue-themes-api-openapi.yml
+- aid: british-columbia-data-catalogue:british-columbia-data-catalogue-resource-links-api
+  name: British Columbia Data Catalogue Resource Links API
+  description: >-
+    The Resource Links API from British Columbia Data Catalogue — 1 operation(s) for resource links.
+  humanURL: https://catalogue.data.gov.bc.ca/
+  baseURL: https://catalogue.data.gov.bc.ca/api/3
+  tags:
+  - Resource Links
+  properties:
+  - type: OpenAPI
+    url: openapi/british-columbia-data-catalogue-resource-links-api-openapi.yml
 common:
   - type: FinOps
     url: finops/british-columbia-data-catalogue-finops.yml

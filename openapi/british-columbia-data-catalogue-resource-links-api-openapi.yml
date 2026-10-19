@@ -1,0 +1,63 @@
+openapi: 3.2.0
+info:
+  version: '1.0'
+  title: BC Gov News API Service 1.0 Resource Links API
+  description: News API
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: https://news.api.gov.bc.ca/
+tags:
+- name: Resource Links
+paths:
+  /api/ResourceLinks:
+    get:
+      tags:
+      - Resource Links
+      summary: Get all resource links
+      operationId: ResourceLinks_GetAll
+      parameters:
+      - name: api-version
+        in: query
+        description: The requested API version
+        required: true
+        schema:
+          type: string
+          default: '1.0'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ResourceLink'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ResourceLink'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ResourceLink'
+components:
+  schemas:
+    DataModel:
+      type: object
+      properties:
+        key:
+          type: string
+        timestamp:
+          format: date-time
+          type: string
+    ResourceLink:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/DataModel'
+      properties:
+        uri:
+          type: string

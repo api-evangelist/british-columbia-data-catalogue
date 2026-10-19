@@ -1,0 +1,78 @@
+openapi: 3.2.0
+info:
+  version: '1.0'
+  title: BC Gov News API Service 1.0 Home API
+  description: News API
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: https://news.api.gov.bc.ca/
+tags:
+- name: Home
+paths:
+  /api/Home:
+    get:
+      tags:
+      - Home
+      summary: Returns the top level content for the home page
+      operationId: Home_Get
+      parameters:
+      - name: api-version
+        in: query
+        description: The requested API version
+        required: true
+        schema:
+          type: string
+          default: '1.0'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Home'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Home'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Home'
+components:
+  schemas:
+    DataIndex:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/DataModel'
+      properties:
+        kind:
+          type: string
+        name:
+          type: string
+        topPostKey:
+          type: string
+        featurePostKey:
+          type: string
+    Home:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/DataIndex'
+      properties:
+        liveWebcastFlashMediaManifestUrl:
+          type: string
+        liveWebcastM3uPlaylist:
+          type: string
+        name:
+          type: string
+        topPostKey:
+          type: string
+        featurePostKey:
+          type: string
+    DataModel:
+      type: object
+      properties:
+        key:
+          type: string
+        timestamp:
+          format: date-time
+          type: string

@@ -1,0 +1,240 @@
+openapi: 3.2.0
+info:
+  version: '1.0'
+  title: BC Gov News API Service 1.0 Ministries API
+  description: News API
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: https://news.api.gov.bc.ca/
+tags:
+- name: Ministries
+paths:
+  /api/Ministries:
+    get:
+      tags:
+      - Ministries
+      summary: Get all ministries
+      operationId: Ministries_GetAll
+      parameters:
+      - name: api-version
+        in: query
+        description: The requested API version
+        required: true
+        schema:
+          type: string
+          default: '1.0'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Ministry'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Ministry'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Ministry'
+  /api/Ministries/{key}:
+    get:
+      tags:
+      - Ministries
+      summary: Get the Ministry associated with the ministry key
+      operationId: Ministries_GetOne
+      parameters:
+      - name: key
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: string
+      - name: api-version
+        in: query
+        description: The requested API version
+        required: true
+        schema:
+          type: string
+          default: '1.0'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Ministry'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Ministry'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Ministry'
+  /api/Ministries/{key}/Minister:
+    get:
+      tags:
+      - Ministries
+      summary: Get the Minister associated with the ministry key
+      operationId: Ministries_GetMinister
+      parameters:
+      - name: key
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: string
+      - name: api-version
+        in: query
+        description: The requested API version
+        required: true
+        schema:
+          type: string
+          default: '1.0'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Minister'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Minister'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Minister'
+components:
+  schemas:
+    DataModel:
+      type: object
+      properties:
+        key:
+          type: string
+        timestamp:
+          format: date-time
+          type: string
+    Ministry:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Category'
+      properties:
+        childMinistryKey:
+          type: string
+        parentMinistryKey:
+          type: string
+        ministryUrl:
+          type: string
+        displayAdditionalName:
+          type: string
+        topicLinks:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceLink'
+        serviceLinks:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceLink'
+        newsletterLinks:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceLink'
+        ministerName:
+          type: string
+        contactUser:
+          $ref: '#/components/schemas/Contact'
+        secondContactUser:
+          $ref: '#/components/schemas/Contact'
+        weekendContactNumber:
+          type: string
+        twitterFeedUsername:
+          type: string
+        flickrUri:
+          type: string
+        youtubeUri:
+          type: string
+        audioUri:
+          type: string
+        isActive:
+          type: boolean
+        name:
+          type: string
+        topPostKey:
+          type: string
+        featurePostKey:
+          type: string
+    DataIndex:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/DataModel'
+      properties:
+        kind:
+          type: string
+        name:
+          type: string
+        topPostKey:
+          type: string
+        featurePostKey:
+          type: string
+    Contact:
+      type: object
+      properties:
+        fullName:
+          type: string
+        phoneNumber:
+          type: string
+        mobileNumber:
+          type: string
+        emailAddress:
+          type: string
+    Category:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/DataIndex'
+      properties:
+        twitterFeedUsername:
+          type: string
+        flickrUri:
+          type: string
+        youtubeUri:
+          type: string
+        audioUri:
+          type: string
+        isActive:
+          type: boolean
+        name:
+          type: string
+        topPostKey:
+          type: string
+        featurePostKey:
+          type: string
+    Minister:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/DataModel'
+      properties:
+        headline:
+          type: string
+        summary:
+          type: string
+        details:
+          type: string
+        emailHtml:
+          type: string
+        photo:
+          type: string
+        post:
+          type: string
+    ResourceLink:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/DataModel'
+      properties:
+        uri:
+          type: string
