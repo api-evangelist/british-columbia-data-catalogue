@@ -128,6 +128,8 @@ apis:
   humanURL: https://catalogue.data.gov.bc.ca/
   baseURL: https://catalogue.data.gov.bc.ca/api/3
   tags:
+  - Facebook Posts
+  tags_raw:
   - FacebookPosts
   properties:
   - type: OpenAPI
@@ -138,6 +140,8 @@ apis:
   humanURL: https://catalogue.data.gov.bc.ca/
   baseURL: https://catalogue.data.gov.bc.ca/api/3
   tags:
+  - Homes
+  tags_raw:
   - Home
   properties:
   - type: OpenAPI
